@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +18,16 @@ namespace GeneradorClases.Modelos
         public string clave { get; set; }
         public string req { get; set; }
         public string default_value { get; set; }
-        
-    }
+
+		public List<CampoClase> GetEmptList()
+		{
+			List<CampoClase> lst_campo= new List<CampoClase>();
+
+            lst_campo.Add(new CampoClase());
+			lst_campo.Add(new CampoClase());
+			return lst_campo;
+		}
+	}
     public class Resultados
     {
         public string Tipo_Resultado { get; set; }
@@ -27,4 +36,6 @@ namespace GeneradorClases.Modelos
         public string Variable_Resultado { get; set; }
         public string Parametro_Resultado { get; set; }
     }
+
+  
 }

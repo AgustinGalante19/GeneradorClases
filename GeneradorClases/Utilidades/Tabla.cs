@@ -16,7 +16,7 @@ namespace GeneradorClases.Utilidades
             {
                 List<CampoClase> lst_campos = new List<CampoClase>();
                 DataGridViewRowCollection rows = dataGrid.Rows;
-                for (int i = 0; i < rows.Count - 1; i++)
+                for (int i = 0; i < rows.Count; i++)
                 {
                     CampoClase obj_campoclase = new CampoClase();
                     obj_campoclase.nro = (string)rows[i].Cells[0].Value;

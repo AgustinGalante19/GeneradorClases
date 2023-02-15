@@ -9,3 +9,14 @@ C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorC
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CoreCompileInputs.cache
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb
+D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.exe.config
+D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.exe
+D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.pdb
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.AssemblyReference.cache
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.SuggestedBindingRedirects.cache
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.Inicio.resources
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.Properties.Resources.resources
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.GenerateResource.cache
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CoreCompileInputs.cache
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb

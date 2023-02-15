@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,45 +16,40 @@ namespace GeneradorClases
 {
     public partial class Inicio : Form
     {
-        public Inicio()
+		public Inicio()
         {
             InitializeComponent();
         }
+		private void Inicio_Load(object sender, EventArgs e)
+		{
+		}
 
-        private void btn_fbd_Click(object sender, EventArgs e)
+		private void btn_fbd_Click(object sender, EventArgs e)
         {
             fbd_archivo_path.ShowDialog();
             string lstr_path = fbd_archivo_path.SelectedPath;
-            tb_archivo_path.Text = lstr_path;
-
-
-            
+            tb_archivo_path.Text = lstr_path;            
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
-        {
-            int i = 0;
-            Tabla obj_tabla = new Tabla();
-            DataGridViewRowCollection newRows;
-            List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
-            Campo obj_campo = new Campo();
-            DataTable dataTable = new DataTable();
-            lst_campos.ForEach(campo =>
-            {
-                campo.Tipo_Resultado = obj_campo.CalcularTipo(campo.tipo, Convert.ToInt32(campo.dec), Convert.ToInt32(campo.longitud));
-                newRows = obj_tabla.CargarResultado(dg_datos, "TIPO", campo.Tipo_Resultado, i);
+        {	
+			Tabla obj_tabla = new Tabla();
 
-                campo.Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(campo.Tipo_Resultado);
-                newRows = obj_tabla.CargarResultado(dg_datos, "ABR_TIPO", campo.Abr_tipo_Resultado, i);
+			Campo obj_campo = new Campo();
 
-                dataTable.Rows.Add(newRows);
-                i++;
-            });
-            dg_datos.DataSource = dataTable;
-        }
+			List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
+					
+			for (int i = 0; i < lst_campos.Count - 1; i++)
+			{
+				lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
 
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-        }
-    }
+				lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
+			}			
+
+			var lst = new BindingList<CampoClase>(lst_campos);
+
+			dg_datos.DataSource = null;
+			dg_datos.DataSource = lst;		
+		}	
+	}
 }
