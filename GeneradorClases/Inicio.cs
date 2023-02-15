@@ -32,23 +32,28 @@ namespace GeneradorClases
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            int i = 0;
             Tabla obj_tabla = new Tabla();
+            DataGridViewRowCollection newRows;
             List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
             Campo obj_campo = new Campo();
-            CampoClase elemento = lst_campos.First();
-            string resultado = obj_campo.CalcularTipo(elemento.tipo, elemento.dec, elemento.longitud);
-            DataGridViewRowCollection newRows = obj_tabla.CargarResultado(dg_datos, "TIPO", resultado, 0);
-            dg_datos.Rows.Add(newRows[0]);
-            
-            MessageBox.Show(resultado);
+            DataTable dataTable = new DataTable();
+            lst_campos.ForEach(campo =>
+            {
+                campo.Tipo_Resultado = obj_campo.CalcularTipo(campo.tipo, Convert.ToInt32(campo.dec), Convert.ToInt32(campo.longitud));
+                newRows = obj_tabla.CargarResultado(dg_datos, "TIPO", campo.Tipo_Resultado, i);
+
+                campo.Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(campo.Tipo_Resultado);
+                newRows = obj_tabla.CargarResultado(dg_datos, "ABR_TIPO", campo.Abr_tipo_Resultado, i);
+
+                dataTable.Rows.Add(newRows);
+                i++;
+            });
+            dg_datos.DataSource = dataTable;
         }
 
         private void Inicio_Load(object sender, EventArgs e)
         {
         }
-
-        private void campoClaseBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-                    }
     }
 }

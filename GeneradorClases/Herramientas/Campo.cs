@@ -69,5 +69,48 @@ namespace GeneradorClases.Herramientas
             }
             return lstr_res;
         }
+        public string CalcularAbrTipo(string tipo)
+        {
+            string lstr_result = "";
+            tipo = tipo.ToUpper();
+            switch (tipo)
+            {
+                case "LONG":
+                    lstr_result = "lng";
+                    break;
+                case "DOUBLE":
+                    lstr_result = "dbl";
+                    break;
+                case "INTEGER":
+                    lstr_result = "int";
+                    break;
+                case "BOOLEAN":
+                    lstr_result = "bln";
+                    break;
+                case "STRING":
+                    lstr_result = "str";
+                    break;
+            }
+            return lstr_result;
+        }
+        public string CalcularSiglaTipo(string tipo)
+        {
+            string lstr_result = "";
+            tipo = tipo.ToUpper();
+            switch (tipo)
+            {
+                case "LONG":
+                case "INTEGER":
+                case "DOUBLE":
+                    lstr_result = "N";
+                    break;
+                case "BOOLEAN":
+                    lstr_result = "B";
+                    break;
+                //case "":
+            }
+
+            return lstr_result;
+        }
     }
 }

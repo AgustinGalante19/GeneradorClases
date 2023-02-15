@@ -70,6 +70,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Properties\DataSources\GeneradorClases.Modelos.CampoClase.datasource" />
+    <None Include="Properties\DataSources\GeneradorClases.Modelos.CampoClase1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

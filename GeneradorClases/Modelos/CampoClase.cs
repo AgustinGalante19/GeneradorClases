@@ -8,12 +8,12 @@ namespace GeneradorClases.Modelos
 {
     public class CampoClase: Resultados
     {
-        public int nro { get; set; }
+        public string nro { get; set; }
         public string descripcion { get; set; }
         public string campo { get; set; }
         public string tipo { get; set; }
-        public int longitud { get; set; }
-        public int dec { get; set; }
+        public string longitud { get; set; }
+        public string dec { get; set; }
         public string clave { get; set; }
         public string req { get; set; }
         public string default_value { get; set; }

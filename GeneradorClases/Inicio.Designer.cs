@@ -51,20 +51,20 @@
             this.btn_revisar = new System.Windows.Forms.Button();
             this.fbd_archivo_path = new System.Windows.Forms.FolderBrowserDialog();
             this.campoClaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.nroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.campoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.decDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.claveDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reqDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.defaultvalueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoResultadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.abrtipoResultadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.abrsiglaResultadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.variableResultadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parametroResultadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.campoClaseBindingSource)).BeginInit();
@@ -233,20 +233,20 @@
             this.dg_datos.AutoGenerateColumns = false;
             this.dg_datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg_datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nroDataGridViewTextBoxColumn,
-            this.descripcionDataGridViewTextBoxColumn,
-            this.campoDataGridViewTextBoxColumn,
-            this.tipoDataGridViewTextBoxColumn,
-            this.longitudDataGridViewTextBoxColumn,
-            this.decDataGridViewTextBoxColumn,
-            this.claveDataGridViewTextBoxColumn,
-            this.reqDataGridViewTextBoxColumn,
-            this.defaultvalueDataGridViewTextBoxColumn,
-            this.tipoResultadoDataGridViewTextBoxColumn,
-            this.abrtipoResultadoDataGridViewTextBoxColumn,
-            this.abrsiglaResultadoDataGridViewTextBoxColumn,
-            this.variableResultadoDataGridViewTextBoxColumn,
-            this.parametroResultadoDataGridViewTextBoxColumn});
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.dataGridViewTextBoxColumn26,
+            this.dataGridViewTextBoxColumn27,
+            this.dataGridViewTextBoxColumn28});
             this.dg_datos.DataSource = this.campoClaseBindingSource;
             this.dg_datos.Location = new System.Drawing.Point(13, 151);
             this.dg_datos.Name = "dg_datos";
@@ -278,89 +278,89 @@
             // 
             this.campoClaseBindingSource.DataSource = typeof(GeneradorClases.Modelos.CampoClase);
             // 
-            // nroDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn15
             // 
-            this.nroDataGridViewTextBoxColumn.DataPropertyName = "nro";
-            this.nroDataGridViewTextBoxColumn.HeaderText = "nro";
-            this.nroDataGridViewTextBoxColumn.Name = "nroDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "nro";
+            this.dataGridViewTextBoxColumn15.HeaderText = "nro";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             // 
-            // descripcionDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn16
             // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "descripcion";
+            this.dataGridViewTextBoxColumn16.HeaderText = "descripcion";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             // 
-            // campoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn17
             // 
-            this.campoDataGridViewTextBoxColumn.DataPropertyName = "campo";
-            this.campoDataGridViewTextBoxColumn.HeaderText = "campo";
-            this.campoDataGridViewTextBoxColumn.Name = "campoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "campo";
+            this.dataGridViewTextBoxColumn17.HeaderText = "campo";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
-            // tipoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn18
             // 
-            this.tipoDataGridViewTextBoxColumn.DataPropertyName = "tipo";
-            this.tipoDataGridViewTextBoxColumn.HeaderText = "tipo";
-            this.tipoDataGridViewTextBoxColumn.Name = "tipoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "tipo";
+            this.dataGridViewTextBoxColumn18.HeaderText = "tipo";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             // 
-            // longitudDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn19
             // 
-            this.longitudDataGridViewTextBoxColumn.DataPropertyName = "longitud";
-            this.longitudDataGridViewTextBoxColumn.HeaderText = "longitud";
-            this.longitudDataGridViewTextBoxColumn.Name = "longitudDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "longitud";
+            this.dataGridViewTextBoxColumn19.HeaderText = "longitud";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             // 
-            // decDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn20
             // 
-            this.decDataGridViewTextBoxColumn.DataPropertyName = "dec";
-            this.decDataGridViewTextBoxColumn.HeaderText = "dec";
-            this.decDataGridViewTextBoxColumn.Name = "decDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "dec";
+            this.dataGridViewTextBoxColumn20.HeaderText = "dec";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             // 
-            // claveDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn21
             // 
-            this.claveDataGridViewTextBoxColumn.DataPropertyName = "clave";
-            this.claveDataGridViewTextBoxColumn.HeaderText = "clave";
-            this.claveDataGridViewTextBoxColumn.Name = "claveDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "clave";
+            this.dataGridViewTextBoxColumn21.HeaderText = "clave";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             // 
-            // reqDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn22
             // 
-            this.reqDataGridViewTextBoxColumn.DataPropertyName = "req";
-            this.reqDataGridViewTextBoxColumn.HeaderText = "req";
-            this.reqDataGridViewTextBoxColumn.Name = "reqDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "req";
+            this.dataGridViewTextBoxColumn22.HeaderText = "req";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
             // 
-            // defaultvalueDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn23
             // 
-            this.defaultvalueDataGridViewTextBoxColumn.DataPropertyName = "default_value";
-            this.defaultvalueDataGridViewTextBoxColumn.HeaderText = "default_value";
-            this.defaultvalueDataGridViewTextBoxColumn.Name = "defaultvalueDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "default_value";
+            this.dataGridViewTextBoxColumn23.HeaderText = "default_value";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             // 
-            // tipoResultadoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn24
             // 
-            this.tipoResultadoDataGridViewTextBoxColumn.DataPropertyName = "Tipo_Resultado";
-            this.tipoResultadoDataGridViewTextBoxColumn.HeaderText = "Tipo_Resultado";
-            this.tipoResultadoDataGridViewTextBoxColumn.Name = "tipoResultadoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "Tipo_Resultado";
+            this.dataGridViewTextBoxColumn24.HeaderText = "Tipo_Resultado";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             // 
-            // abrtipoResultadoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn25
             // 
-            this.abrtipoResultadoDataGridViewTextBoxColumn.DataPropertyName = "Abr_tipo_Resultado";
-            this.abrtipoResultadoDataGridViewTextBoxColumn.HeaderText = "Abr_tipo_Resultado";
-            this.abrtipoResultadoDataGridViewTextBoxColumn.Name = "abrtipoResultadoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn25.DataPropertyName = "Abr_tipo_Resultado";
+            this.dataGridViewTextBoxColumn25.HeaderText = "Abr_tipo_Resultado";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
             // 
-            // abrsiglaResultadoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn26
             // 
-            this.abrsiglaResultadoDataGridViewTextBoxColumn.DataPropertyName = "Abr_sigla_Resultado";
-            this.abrsiglaResultadoDataGridViewTextBoxColumn.HeaderText = "Abr_sigla_Resultado";
-            this.abrsiglaResultadoDataGridViewTextBoxColumn.Name = "abrsiglaResultadoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn26.DataPropertyName = "Abr_sigla_Resultado";
+            this.dataGridViewTextBoxColumn26.HeaderText = "Abr_sigla_Resultado";
+            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             // 
-            // variableResultadoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn27
             // 
-            this.variableResultadoDataGridViewTextBoxColumn.DataPropertyName = "Variable_Resultado";
-            this.variableResultadoDataGridViewTextBoxColumn.HeaderText = "Variable_Resultado";
-            this.variableResultadoDataGridViewTextBoxColumn.Name = "variableResultadoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn27.DataPropertyName = "Variable_Resultado";
+            this.dataGridViewTextBoxColumn27.HeaderText = "Variable_Resultado";
+            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             // 
-            // parametroResultadoDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn28
             // 
-            this.parametroResultadoDataGridViewTextBoxColumn.DataPropertyName = "Parametro_Resultado";
-            this.parametroResultadoDataGridViewTextBoxColumn.HeaderText = "Parametro_Resultado";
-            this.parametroResultadoDataGridViewTextBoxColumn.Name = "parametroResultadoDataGridViewTextBoxColumn";
+            this.dataGridViewTextBoxColumn28.DataPropertyName = "Parametro_Resultado";
+            this.dataGridViewTextBoxColumn28.HeaderText = "Parametro_Resultado";
+            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
             // 
             // Inicio
             // 
@@ -401,7 +401,6 @@
         private System.Windows.Forms.TextBox tb_tabla_detalle;
         private System.Windows.Forms.TextBox tb_nombre_tabla;
         private System.Windows.Forms.Button btn_reset;
-        private System.Windows.Forms.DataGridView dg_datos;
         private System.Windows.Forms.Button btn_generar;
         private System.Windows.Forms.Button btn_revisar;
         public System.Windows.Forms.FolderBrowserDialog fbd_archivo_path;
@@ -420,6 +419,35 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn abrsiglaResultadoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn variableResultadoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn parametroResultadoDataGridViewTextBoxColumn;
+        public System.Windows.Forms.DataGridView dg_datos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
         private System.Windows.Forms.BindingSource campoClaseBindingSource;
     }
 }
