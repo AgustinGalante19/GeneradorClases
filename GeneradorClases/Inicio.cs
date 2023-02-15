@@ -38,18 +38,21 @@ namespace GeneradorClases
 			Campo obj_campo = new Campo();
 
 			List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
-					
+
 			for (int i = 0; i < lst_campos.Count - 1; i++)
 			{
 				lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
 
 				lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
-			}			
+				lst_campos[i].Abr_sigla_Resultado = obj_campo.CalcularSiglaTipo(lst_campos[i].Tipo_Resultado);
+				lst_campos[i].Variable_Resultado = obj_campo.CalcularVariable("m", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+                lst_campos[i].Parametro_Resultado = obj_campo.CalcularVariable("p", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+            }
 
 			var lst = new BindingList<CampoClase>(lst_campos);
 
 			dg_datos.DataSource = null;
 			dg_datos.DataSource = lst;		
-		}	
+		}
 	}
 }

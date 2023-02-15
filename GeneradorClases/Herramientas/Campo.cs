@@ -107,7 +107,26 @@ namespace GeneradorClases.Herramientas
                 case "BOOLEAN":
                     lstr_result = "B";
                     break;
-                //case "":
+                case "DATE":
+                case "DATETIME":
+                case "SMALLDATETIME":
+                    lstr_result = "F";
+                    break;
+                case "STRING":
+                    lstr_result = "T";
+                    break;
+            }
+
+            return lstr_result;
+        }
+
+        public string CalcularVariable(string uso, string campo, string abr_tipo)
+        {
+            string lstr_result = "";
+            campo = campo.ToLower();
+            if (uso == "p" || uso == "m")
+            {
+                lstr_result = uso + abr_tipo + "_" + campo;
             }
 
             return lstr_result;
