@@ -16,6 +16,7 @@ namespace GeneradorClases.Utilidades
             {
                 List<CampoClase> lst_campos = new List<CampoClase>();
                 DataGridViewRowCollection rows = dataGrid.Rows;
+
                 for (int i = 0; i < rows.Count; i++)
                 {
                     CampoClase obj_campoclase = new CampoClase();
@@ -33,7 +34,8 @@ namespace GeneradorClases.Utilidades
                 }
 
                 return lst_campos;
-            }catch(Exception ex)
+            } 
+            catch(Exception ex)
             {
                 throw ex;
             }
@@ -57,7 +59,24 @@ namespace GeneradorClases.Utilidades
             }
             return rows;
         }
-    }
 
-    
+        public string Validar(int nro, string descripcion, string campo, string tipo, int longitud, int dec, string clave, string req)
+        {
+            string lstr_result = "OK";
+            if(nro == 0 || descripcion == null || campo == null || tipo == null || longitud == 0 || req == null) {
+                lstr_result = "* Hay campos sin rellenar.";
+            }
+
+            if(longitud < 0)
+            {
+                lstr_result += "\n * La longitud no puede ser menor a 0";
+            }
+
+            if (dec < 0)
+            {
+                lstr_result += "\n * La cantidad de decimales no puede ser menor a 0";
+            }
+            return lstr_result;
+        }
+    }
 }
