@@ -34,13 +34,11 @@ namespace GeneradorClases
         private void btn_generar_Click(object sender, EventArgs e)
         {	
 			Tabla obj_tabla = new Tabla();
-
-			Campo obj_campo = new Campo();
-
+            Campo obj_campo = new Campo();
 			List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
 
             string lstr_result = ValidarGrid(lst_campos);
-
+            lbl_validacion.Text = "Estado validacion: " + lstr_result;
             if(lstr_result == "OK")
             {
                 for (int i = 0; i < lst_campos.Count - 1; i++)
@@ -66,7 +64,7 @@ namespace GeneradorClases
                     }
                 }
             }
-            else
+            else if(lstr_result != "")
             {
                 MessageBox.Show(lstr_result, "Estado de validación");
             }
@@ -75,11 +73,9 @@ namespace GeneradorClases
         private void btn_revisar_Click(object sender, EventArgs e)
         {
             Tabla obj_tabla = new Tabla();
-
             List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
 
             string lstr_result = ValidarGrid(lst_campos);
-            
 
             MessageBox.Show(lstr_result,"Estado de validación");
         }
@@ -90,12 +86,15 @@ namespace GeneradorClases
             Tabla obj_tabla = new Tabla();
 
             string lstr_result = "";
-            for (int i = 0; i < lst_campos.Count -1; i++)
+            for (int i = 0; i < lst_campos.Count; i++)
             {
-                lstr_result = obj_tabla.Validar(Convert.ToInt32(lst_campos[i].nro), lst_campos[i].descripcion, lst_campos[i].campo, lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].longitud), Convert.ToInt32(lst_campos[i].dec), lst_campos[i].clave, lst_campos[i].req);
-                for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                if (lst_campos[i].nro != null && lst_campos[i].descripcion != null && lst_campos[i].tipo != null && lst_campos[i].longitud != null && lst_campos[i].dec != null && lst_campos[i].clave != null && lst_campos[i].req != null && lst_campos[i].default_value != null)
                 {
-                    dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                    lstr_result = obj_tabla.Validar(Convert.ToInt32(lst_campos[i].nro), lst_campos[i].descripcion, lst_campos[i].campo, lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].longitud), Convert.ToInt32(lst_campos[i].dec), lst_campos[i].clave, lst_campos[i].req);
+                    for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                    {
+                        dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                    }
                 }
             }
             return lstr_result;

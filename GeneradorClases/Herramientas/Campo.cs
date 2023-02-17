@@ -11,13 +11,14 @@ namespace GeneradorClases.Herramientas
         public string CalcularTipo(string tipo, int dec, int longValue)
         {
             string lstr_res = "";
+            
             tipo = tipo.ToUpper();
             switch (tipo)
             {
                 case "NUMERIC":
                     {
                         //lstr_res = Interaction.IIf(pint_dec == 0, "Long", "Double");
-                        if(dec == 0)
+                        if (dec == 0)
                         {
                             lstr_res = "Long";
                         }
@@ -67,6 +68,7 @@ namespace GeneradorClases.Herramientas
                         break;
                     }
             }
+            
             return lstr_res;
         }
         public string CalcularAbrTipo(string tipo)
@@ -123,10 +125,13 @@ namespace GeneradorClases.Herramientas
         public string CalcularVariable(string uso, string campo, string abr_tipo)
         {
             string lstr_result = "";
-            campo = campo.ToLower();
-            if (uso == "p" || uso == "m")
+            if(campo != null)
             {
-                lstr_result = uso + abr_tipo + "_" + campo;
+                campo = campo.ToLower();
+                if (uso == "p" || uso == "m")
+                {
+                    lstr_result = uso + abr_tipo + "_" + campo;
+                }
             }
 
             return lstr_result;

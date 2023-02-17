@@ -62,19 +62,43 @@ namespace GeneradorClases.Utilidades
 
         public string Validar(int nro, string descripcion, string campo, string tipo, int longitud, int dec, string clave, string req)
         {
-            string lstr_result = "OK";
+            string lstr_result = "";
+            bool error = false;
             if(nro == 0 || descripcion == null || campo == null || tipo == null || longitud == 0 || req == null) {
                 lstr_result = "* Hay campos sin rellenar.";
+                error = true;
             }
 
             if(longitud < 0)
             {
                 lstr_result += "\n * La longitud no puede ser menor a 0";
+                error = true;
             }
 
             if (dec < 0)
             {
                 lstr_result += "\n * La cantidad de decimales no puede ser menor a 0";
+                error = true;
+            }
+
+            req = req.ToLower();
+            clave = clave.ToLower();
+
+            if(req != "s" && req != "n")
+            {
+                lstr_result += "\n * Req se debe completar con s/n";
+                error = true;
+            }
+
+            if (clave != "s" && clave != "n")
+            {
+                lstr_result += "\n * Clave se debe completar con s/n";
+                error = true;
+            }
+
+            if(error == false)
+            {
+                lstr_result = "OK";
             }
             return lstr_result;
         }

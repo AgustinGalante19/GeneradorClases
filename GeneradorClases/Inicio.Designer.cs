@@ -70,6 +70,7 @@
             this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.campoClaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lbl_validacion = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_datos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.campoClaseBindingSource)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_validacion);
             this.panel1.Controls.Add(this.btn_fbd);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
@@ -351,6 +353,7 @@
             this.dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn25.HeaderText = "Abr";
             this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn26
             // 
@@ -359,6 +362,7 @@
             this.dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn26.HeaderText = "Abr";
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            this.dataGridViewTextBoxColumn26.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn27
             // 
@@ -367,6 +371,7 @@
             this.dataGridViewTextBoxColumn27.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn27.HeaderText = "Variable";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            this.dataGridViewTextBoxColumn27.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn28
             // 
@@ -375,10 +380,20 @@
             this.dataGridViewTextBoxColumn28.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn28.HeaderText = "Parametro";
             this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            this.dataGridViewTextBoxColumn28.ReadOnly = true;
             // 
             // campoClaseBindingSource
             // 
             this.campoClaseBindingSource.DataSource = typeof(GeneradorClases.Modelos.CampoClase);
+            // 
+            // lbl_validacion
+            // 
+            this.lbl_validacion.AutoSize = true;
+            this.lbl_validacion.Location = new System.Drawing.Point(5, 118);
+            this.lbl_validacion.Name = "lbl_validacion";
+            this.lbl_validacion.Size = new System.Drawing.Size(94, 13);
+            this.lbl_validacion.TabIndex = 5;
+            this.lbl_validacion.Text = "Estado validacion:";
             // 
             // Inicio
             // 
@@ -467,6 +482,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.Label lbl_validacion;
     }
 }
 
