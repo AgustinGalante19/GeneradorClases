@@ -33,40 +33,43 @@ namespace GeneradorClases
 
         private void btn_generar_Click(object sender, EventArgs e)
         {	
-			Tabla obj_tabla = new Tabla();
-            Campo obj_campo = new Campo();
-			List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
-
-            string lstr_result = ValidarGrid(lst_campos);
-            lbl_validacion.Text = "Estado validacion: " + lstr_result;
-            if(lstr_result == "OK")
+			if(cb_lenguajes.SelectedItem == "C#")
             {
-                for (int i = 0; i < lst_campos.Count - 1; i++)
+                Tabla obj_tabla = new Tabla();
+                Campo obj_campo = new Campo();
+                List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
+
+                string lstr_result = ValidarGrid(lst_campos);
+                lbl_validacion.Text = "Estado validacion: " + lstr_result;
+                if (lstr_result == "OK")
                 {
-                    lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
-
-                    lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
-                    lst_campos[i].Abr_sigla_Resultado = obj_campo.CalcularSiglaTipo(lst_campos[i].Tipo_Resultado);
-                    lst_campos[i].Variable_Resultado = obj_campo.CalcularVariable("m", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
-                    lst_campos[i].Parametro_Resultado = obj_campo.CalcularVariable("p", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
-                }
-
-                var lst = new BindingList<CampoClase>(lst_campos);
-
-                dg_datos.DataSource = null;
-                dg_datos.DataSource = lst;
-
-                for (int i = 0; i < lst_campos.Count - 1; i++)
-                {
-                    for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                    for (int i = 0; i < lst_campos.Count - 1; i++)
                     {
-                        dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                        lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
+
+                        lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
+                        lst_campos[i].Abr_sigla_Resultado = obj_campo.CalcularSiglaTipo(lst_campos[i].Tipo_Resultado);
+                        lst_campos[i].Variable_Resultado = obj_campo.CalcularVariable("m", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+                        lst_campos[i].Parametro_Resultado = obj_campo.CalcularVariable("p", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+                    }
+
+                    var lst = new BindingList<CampoClase>(lst_campos);
+
+                    dg_datos.DataSource = null;
+                    dg_datos.DataSource = lst;
+
+                    for (int i = 0; i < lst_campos.Count - 1; i++)
+                    {
+                        for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                        {
+                            dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                        }
                     }
                 }
-            }
-            else if(lstr_result != "")
-            {
-                MessageBox.Show(lstr_result, "Estado de validación");
+                else if (lstr_result != "")
+                {
+                    MessageBox.Show(lstr_result, "Estado de validación");
+                }
             }
         }
 
