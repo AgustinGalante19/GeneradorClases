@@ -20,3 +20,4 @@ D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.Gene
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CoreCompileInputs.cache
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb
+D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.TablaText.resources
