@@ -21,14 +21,40 @@ namespace GeneradorClases
 		public TablaText()
 		{			
 			InitializeComponent();
-			comboBox1.Text = ",";
+			cb_separador.Text = "Coma";
 		}
 
 		private void btnCargar_Click(object sender, EventArgs e)
 		{
 			text = textBox1.Text;
-			separator = comboBox1.SelectedItem.ToString();
-			this.Close();
+			separator = cb_separador.SelectedItem.ToString();
+
+            switch (separator)
+            {
+                case "Pipe":
+                    separator = "|";
+                    break;
+                case "Coma":
+                    separator = ",";
+                    break;
+                case "Punto":
+                    separator = ".";
+                    break;
+                case "Numeral":
+                    separator = "#";
+                    break;
+                case "Guion":
+                    separator = "-";
+                    break;
+                case "Guion bajo":
+                    separator = "_";
+                    break;
+                case "Punto y coma":
+                    separator = ";";
+                    break;
+            }
+
+            this.Close();
 		}
 		public List<CampoClase> GetText()
 		{

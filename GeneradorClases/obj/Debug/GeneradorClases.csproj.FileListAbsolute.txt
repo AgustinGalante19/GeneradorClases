@@ -21,3 +21,4 @@ D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.Core
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.TablaText.resources
+C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.TablaText.resources
