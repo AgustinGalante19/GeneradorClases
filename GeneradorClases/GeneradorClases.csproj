@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Herramientas\Campo.cs" />
+    <Compile Include="Herramientas\IWriterBuilder.cs" />
     <Compile Include="Herramientas\Writer.cs" />
+    <Compile Include="Herramientas\WriterBuilder.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>

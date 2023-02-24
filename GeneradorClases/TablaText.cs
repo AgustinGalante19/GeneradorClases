@@ -14,11 +14,14 @@ namespace GeneradorClases
 {
 	public partial class TablaText : Form
 	{
-		string text = "";
-		string separator = "";
+		private string text = "";
+		private string separator = "";
+		private List<CampoClase> lstCampoClase;
+		
 		public TablaText()
-		{
+		{			
 			InitializeComponent();
+			comboBox1.Text = ",";
 		}
 
 		private void btnCargar_Click(object sender, EventArgs e)
@@ -29,15 +32,22 @@ namespace GeneradorClases
 		}
 		public List<CampoClase> GetText()
 		{
+			if (textBox1.Text == "") 
+				return null;
+
+			lstCampoClase = MappingText();
+			return lstCampoClase;
+		}
+
+		public List<CampoClase> MappingText()
+		{
 			CampoClase campo;
 
-			text = textBox1.Text;
-			
 			List<string> list = text.Split(new char[3] { Convert.ToChar(separator), '\r', '\n' }).ToList();
 
-			List<CampoClase> lstCampoClase = new List<CampoClase>();
+			lstCampoClase = new List<CampoClase>();
 
-			for (int i = 0; i <= list.Count -1; i++)
+			for (int i = 0; i <= list.Count - 1; i++)
 			{
 				if (list[i] != "")
 				{
@@ -45,7 +55,7 @@ namespace GeneradorClases
 					{
 						nro = list[i],
 						descripcion = list[i + 1],
-						campo = list[i +2],											
+						campo = list[i + 2],
 						tipo = list[i + 3],
 						longitud = list[i + 4],
 						dec = list[i + 5],
@@ -54,12 +64,14 @@ namespace GeneradorClases
 						default_value = list[i + 8]
 					};
 
-					i+= 8;
+					i += 8;
 
 					lstCampoClase.Add(campo);
 				}
 			}
+
 			return lstCampoClase;
 		}
+		
 	}
 }

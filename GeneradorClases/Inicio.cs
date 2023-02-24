@@ -16,28 +16,28 @@ namespace GeneradorClases
 {
     public partial class Inicio : Form
     {
-		public Inicio()
+        public Inicio()
         {
             InitializeComponent();
         }
-		private void Inicio_Load(object sender, EventArgs e)
-		{
-		}
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+        }
 
-		private void btn_fbd_Click(object sender, EventArgs e)
+        private void btn_fbd_Click(object sender, EventArgs e)
         {
             fbd_archivo_path.ShowDialog();
             string lstr_path = fbd_archivo_path.SelectedPath;
-            tb_archivo_path.Text = lstr_path;            
+            tb_archivo_path.Text = lstr_path;
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
-        {	
-			if(cb_lenguajes.SelectedItem == "C#")
+        {
+            if (cb_lenguajes.SelectedItem == "C#")
             {
                 Tabla obj_tabla = new Tabla();
                 Campo obj_campo = new Campo();
-                
+
                 //Lleno la lista con los datos del grid
                 List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
 
@@ -49,20 +49,20 @@ namespace GeneradorClases
                     //Calculo los tipos y seteo las propiedades
                     lst_campos = CalcularTipos(lst_campos);
 
-					//Bindeo los datos utilizando BindingList para que herede la interfaz que comprende las celdas
-					dg_datos.DataSource = new BindingList<CampoClase>(lst_campos);
+                    //Bindeo los datos utilizando BindingList para que herede la interfaz que comprende las celdas
+                    dg_datos.DataSource = new BindingList<CampoClase>(lst_campos);
 
-					//pinto las celdas
-					for (int i = 0; i < lst_campos.Count - 1; i++)
-					{
-						for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
-						{
-							dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
-						}
-					}
+                    //pinto las celdas
+                    for (int i = 0; i < lst_campos.Count - 1; i++)
+                    {
+                        for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                        {
+                            dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                        }
+                    }
 
                     CrearClase();
-				}
+                }
                 else if (lstr_result != "")
                 {
                     MessageBox.Show(lstr_result, "Estado de validación");
@@ -71,38 +71,39 @@ namespace GeneradorClases
         }
         private void CrearClase()
         {
-			try
-			{
-				Writer writer = new Writer(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
-				writer.CrearClase(tb_nombre_clase.Text);
-				writer.CrearMetodos(new List<string>());
-				writer.CrearPropiedades();
-				writer.CrearVariables();
-				writer.Fin();
+            try
+            {
+                Writer writer = new Writer(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
-				MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
+                writer.CrearClase(tb_nombre_clase.Text);
+                writer.CrearMetodos(new List<string>());
+                writer.CrearPropiedades();
+                writer.CrearVariables();
+                writer.Fin();
+
+                MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         public List<CampoClase> CalcularTipos(List<CampoClase> lst_campos)
         {
-			Campo obj_campo = new Campo();
+            Campo obj_campo = new Campo();
 
-			for (int i = 0; i < lst_campos.Count - 1; i++)
-			{
-				lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
+            for (int i = 0; i < lst_campos.Count - 1; i++)
+            {
+                lst_campos[i].Tipo_Resultado = obj_campo.CalcularTipo(lst_campos[i].tipo, Convert.ToInt32(lst_campos[i].dec), Convert.ToInt32(lst_campos[i].longitud));
 
-				lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
-				lst_campos[i].Abr_sigla_Resultado = obj_campo.CalcularSiglaTipo(lst_campos[i].Tipo_Resultado);
-				lst_campos[i].Variable_Resultado = obj_campo.CalcularVariable("m", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
-				lst_campos[i].Parametro_Resultado = obj_campo.CalcularVariable("p", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
-			}
+                lst_campos[i].Abr_tipo_Resultado = obj_campo.CalcularAbrTipo(lst_campos[i].Tipo_Resultado);
+                lst_campos[i].Abr_sigla_Resultado = obj_campo.CalcularSiglaTipo(lst_campos[i].Tipo_Resultado);
+                lst_campos[i].Variable_Resultado = obj_campo.CalcularVariable("m", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+                lst_campos[i].Parametro_Resultado = obj_campo.CalcularVariable("p", lst_campos[i].campo, lst_campos[i].Abr_tipo_Resultado);
+            }
 
             return lst_campos;
-		}
+        }
         private void btn_revisar_Click(object sender, EventArgs e)
         {
             Tabla obj_tabla = new Tabla();
@@ -110,7 +111,7 @@ namespace GeneradorClases
 
             string lstr_result = ValidarGrid(lst_campos);
 
-            MessageBox.Show(lstr_result,"Estado de validación");
+            MessageBox.Show(lstr_result, "Estado de validación");
         }
 
 
@@ -131,8 +132,8 @@ namespace GeneradorClases
                     }
                 }
 
-				
-			}
+
+            }
             return lstr_result;
         }
 
@@ -141,15 +142,18 @@ namespace GeneradorClases
             dg_datos.Rows.Clear();
         }
 
-		private void generarClaseToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			TablaText tablaText = new TablaText();
-			
-            tablaText.ShowDialog();
+        private void generarClaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TablaText tablaText = new TablaText();
 
-            List<CampoClase> campoClases = tablaText.GetText();
+			tablaText.ShowDialog();
 
-			dg_datos.DataSource = new BindingList<CampoClase>(campoClases);
+			if (tablaText.GetText() != null)
+            {
+                List<CampoClase> campoClases = tablaText.GetText();
+                dg_datos.DataSource = new BindingList<CampoClase>(campoClases);
+            }            
 		}
+
 	}
 }
