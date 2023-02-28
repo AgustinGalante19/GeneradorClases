@@ -85,7 +85,7 @@ namespace GeneradorClases.Herramientas.Writer
 					}
 				}
 				Escribir(")");
-				string[] content = metodo.contenido.Split(Convert.ToChar("\n");
+				string[] content = metodo.contenido.Split(Convert.ToChar("\n"));
 				for(int i = 0; i < content.Length; i++)
 				{
 					content[i] = "\t" + content[i];
@@ -104,14 +104,12 @@ namespace GeneradorClases.Herramientas.Writer
 			}
 		}
 
-		public void CrearPropiedades()
+		public void CrearPropiedades(List<Resultados> properties)
 		{
-			Escribir("		Propiedad1");
-			Escribir("		Propiedad2");
-			Escribir("		Propiedad3");
-			Escribir("		Propiedad4");
-
-			Escribir("-----------");
+			Escribir("\n");
+			properties.RemoveAt(properties.Count -1);
+			properties.ForEach(propertie => Escribir("\n\t" + "private " + propertie.Tipo_Resultado.ToLower() + " " + propertie.Variable_Resultado + ";"));
+			Escribir("\n");
 		}
 
 		public void CrearVariables()

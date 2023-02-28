@@ -10,6 +10,9 @@ C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorC
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb
 C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.TablaText.resources
+C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\bin\Debug\Newtonsoft.Json.dll
+C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\bin\Debug\Newtonsoft.Json.xml
+C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CopyComplete
 D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.exe.config
 D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.exe
 D:\Trabajo\GeneradorClases\GeneradorClases\bin\Debug\GeneradorClases.pdb
@@ -25,6 +28,3 @@ D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.Core
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CopyComplete
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.exe
 D:\Trabajo\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.pdb
-C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\bin\Debug\Newtonsoft.Json.dll
-C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\bin\Debug\Newtonsoft.Json.xml
-C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\obj\Debug\GeneradorClases.csproj.CopyComplete

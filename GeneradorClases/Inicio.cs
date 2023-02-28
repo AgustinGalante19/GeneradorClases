@@ -35,8 +35,8 @@ namespace GeneradorClases
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
-        {
-            if (cb_lenguajes.SelectedItem == "C#")
+        {	
+			if (cb_lenguajes.SelectedItem == "C#")
             {
                 Tabla obj_tabla = new Tabla();
                 Campo obj_campo = new Campo();
@@ -62,9 +62,17 @@ namespace GeneradorClases
                         {
                             dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
                         }
-                    }
+                    }			                    
 
-                    CrearClase();
+
+					CrearClase(lst_campos.Select(x =>
+					 new Resultados()
+					 {
+						 Parametro_Resultado = x.Parametro_Resultado,
+						 Tipo_Resultado = x.Tipo_Resultado,
+						 Variable_Resultado = x.Variable_Resultado
+					 }
+					).ToList<Resultados>());
                 }
                 else if (lstr_result != "")
                 {
@@ -72,17 +80,18 @@ namespace GeneradorClases
                 }
             }
         }
-        private void CrearClase()
+        private void CrearClase(List<Resultados> properties)
         {
             try
             {
                 WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
-                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
+                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"D:\Trabajo\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
 
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
-                writer.CrearMetodos(_Method.Metodos);
-                //writer.CrearPropiedades();
+				writer.CrearPropiedades(properties);
+				writer.CrearMetodos(_Method.Metodos);                
+             
                 //writer.CrearVariables();                
                 writer.Fin();
 
