@@ -78,12 +78,12 @@ namespace GeneradorClases
             {
                 WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
-                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"D:\Trabajo\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
+                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
 
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
                 writer.CrearMetodos(_Method.Metodos);
-                writer.CrearPropiedades();
-                writer.CrearVariables();                
+                //writer.CrearPropiedades();
+                //writer.CrearVariables();                
                 writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);

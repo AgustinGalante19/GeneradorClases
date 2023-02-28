@@ -71,7 +71,7 @@ namespace GeneradorClases.Herramientas.Writer
 			foreach (var metodo in lst_metodos)
 			{
 				Escribir("\n");
-				Escribir(metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
+				Escribir("\t"+metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
 				Escribir("(");
 				for (int i = 0; i <= metodo.parametros.Count - 1; i++)
 				{
@@ -85,16 +85,21 @@ namespace GeneradorClases.Herramientas.Writer
 					}
 				}
 				Escribir(")");
+				string[] content = metodo.contenido.Split(Convert.ToChar("\n");
+				for(int i = 0; i < content.Length; i++)
+				{
+					content[i] = "\t" + content[i];
+				}
 
-				Escribir(
+				string newContent = string.Join("\n", content);
+
+                Escribir(
 					 " \n"
-					+ "{ " +
+					+ "\t{" +
 					"  \n" +
-
-					metodo.contenido
-
+					newContent
 					+ " \n"
-					+ "}"
+					+ "\t}"
 					);
 			}
 		}
@@ -121,7 +126,7 @@ namespace GeneradorClases.Herramientas.Writer
 
 		public void Fin()
 		{
-			Escribir("}");
+			Escribir("\n}");
 			fs.Close();
 		}
 
