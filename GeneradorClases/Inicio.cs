@@ -1,11 +1,14 @@
 ﻿using GeneradorClases.Herramientas;
+using GeneradorClases.Herramientas.Writer;
 using GeneradorClases.Modelos;
 using GeneradorClases.Utilidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -73,12 +76,14 @@ namespace GeneradorClases
         {
             try
             {
-                Writer writer = new Writer(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
+                WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
-                writer.CrearClase(tb_nombre_clase.Text);
-                writer.CrearMetodos(new List<string>());
+                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"D:\Trabajo\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
+
+                writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
+                writer.CrearMetodos(_Method.Metodos);
                 writer.CrearPropiedades();
-                writer.CrearVariables();
+                writer.CrearVariables();                
                 writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);

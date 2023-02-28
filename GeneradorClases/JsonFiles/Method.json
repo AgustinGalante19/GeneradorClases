@@ -1,0 +1,210 @@
+{
+  "Metodos": [
+    {
+      "alcance": "public",
+      "nombre": "",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": "\n\tvar withBlock = mTablaConfig;\n\twithBlock.lg_identity = true;\n\twithBlock.cd_tabla = Cet006.TablaOL;\n\twithBlock.ds_vista = Cet006.TablaOL;\n\twithBlock.campo_id = \"\";\n\twithBlock.campo_cd = \"\";\n \twithBlock.campo_ds = \"\";\n\tps_set_default();\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "Cargar",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "long",
+          "nombre": "plng_ID = 0"
+        },
+        {
+          "tipo": "CVM.ABMope",
+          "nombre": "plng_ID = null"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_EsCopia = false"
+        }
+      ],
+      "contenido": "\n\tCVM.Sql lsql;\n\tstring lstr_res = \"\"; \n\tif (plng_ID != 0)\n\tthis.ID = plng_ID;\n\tif (this.ID == 0)\n\treturn \"Parámetros Insuficientes\";\n\tlsql = new CVM.Sql();\n{\n\tvar withBlock = lsql;\n\twithBlock.q_SELECT(\"v1.*\");\n\twithBlock.q_FROM(mTablaConfig.ds_vista, \"V1\");\n\twithBlock.w_WHERE(withBlock.SqlCondicion_ID(mTablaConfig.campo_id(\"v1\"), this.ID));\n}\n\tlstr_res = this.CargarDesdeSQL(lsql);\n\tlsql = null;\n\tif (pbln_EsCopia)\n\t{\n\t}\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeSQL",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "CVM.Sql",
+          "nombre": "psql"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_DebeExistir  = true"
+        }
+      ],
+      "contenido": "\n\tDataTable lTab = new DataTable();\n\tstring lstr_res =\"\";\n\t{\n\tvar withBlock = psql;\n\tlstr_res = withBlock.EjecutarDT(lTab);\n\t}\n\tif (lstr_res == \"OK\")\n\t\tlstr_res = this.CargarDesdeDR(lTab, pbln_DebeExistir);\n\tlTab = null;\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "DataTable",
+          "nombre": "pTab"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_DebeExistir"
+        }
+      ],
+      "contenido": "\n\tstring lstr_res = \"OK\";\n\tif (pTab.Rows.Count > 0)\n\t\tlstr_res = this.CargarDesdeDR(pTab.Rows(0));\n\telse if (pbln_DebeExistir)\n\t\tlstr_res = \"No Existen Registros\";\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "DataRow",
+          "nombre": "pReg"
+        }
+      ],
+      "contenido": "\n\t{\n\t\tvar withBlock = this;\n\t\twithBlock.id_cet006 = CVM.DR.Lng(pReg, \"ID_CET006\");\n\t\twithBlock.fddjjliva = CVM.DR.Lng(pReg, \"FDDJJLIVA\");\n\t\twithBlock.ccorpor = CVM.DR.Str(pReg, \"CCORPOR\");\n\t\twithBlock.cfmes = CVM.DR.Lng(pReg, \"CFMES\");\n\t\twithBlock.cfmdex = CVM.DR.Lng(pReg, \"CFMDEX\");\n\t\twithBlock.ajucfmdex = CVM.DR.Lng(pReg, \"AJUCFMDEX\");\n\t\twithBlock.dfmes = CVM.DR.Lng(pReg, \"DFMES\");\n\t\twithBlock.vgmes = CVM.DR.Lng(pReg, \"VGMES\");\n\t\twithBlock.ieemes = CVM.DR.Lng(pReg, \"IEEMES\");\n\t\twithBlock.venmes = CVM.DR.Lng(pReg, \"VENMES\");\n\t\twithBlock.ciejer = CVM.DR.Lng(pReg, \"CIEJER\");\n\t\twithBlock.pimes = CVM.DR.Lng(pReg, \"PIMES\");\n\t\twithBlock.acmes = CVM.DR.Lng(pReg, \"ACMES\");\n\t\twithBlock.cfmdmes = CVM.DR.Lng(pReg, \"CFMDMES\");\n\t\twithBlock.cfmrmes = CVM.DR.Lng(pReg, \"CFMRMES\");\n\t\twithBlock.cusuario = CVM.DR.Str(pReg, \"CUSUARIO\");\n\t\twithBlock.factualz = CVM.DR.Lng(pReg, \"FACTUALZ\");\n\t\twithBlock.hsactualz = CVM.DR.Lng(pReg, \"HSACTUALZ\");\n\t\twithBlock.cprocesoau = CVM.DR.Str(pReg, \"CPROCESOAU\");\n\t\twithBlock.factualzau = CVM.DR.Lng(pReg, \"FACTUALZAU\");\n\t\twithBlock.hsactualza = CVM.DR.Lng(pReg, \"HSACTUALZA\");\t\n}\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "ref DataRow",
+          "nombre": "pReg"
+        }
+      ],
+      "contenido": "\n\tstring lstr_res = \"OK\";\n {\n\t\tvar withBlock = this;\n\t\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\t\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\t\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\t\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\t\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\t\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\t\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\t\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\n\t\tCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\t\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDMES\", withBlock.cfmdmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\t\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\t\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", withBlock.cprocesoau);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "Actualizar",
+      "tipo": "string",
+      "parametros": [],
+      "contenido": "\n\tCVM.Sql lsql;\n\tlong llng_identity = -1;\n\tSqlClient.SqlConnection pCnn = default;\n\tSqlClient.SqlTransaction pTrn = default;\n\tstring lstr_res = \"OK\";\n\tif (!mbln_puede_actualizar)\n {\n\treturn \"Validación Pendiente\";\n\t}\n\t// If Me.Ope.EsAnula Or Me.Ope.EsActiva Then\n\t// Return pf_act_estado(Me.Ope.EsAnula, Me.Ope.EsActiva)\n\t// End If\n\t// -- --------------------------------------------------\n\t// -- apertura de base de datos\n\t// -- --------------------------------------------------\n\tlstr_res = CVM.BdSql.IniciarOperacion(pCnn, pTrn, true, true);\n\t// ------------------------------------------------------\n\t// Elimino tablas asociadas\n\t// ------------------------------------------------------\n\t// If lstr_res = \"OK\" AndAlso Me.Ope.EsBaja Then\n\t// lstr_res = pf_EliminarRelaciones(pCnn, pTrn)\n\t// End If\n\t// ------------------------------------------------------\n\t// CE registro VIEJO\n\t// ------------------------------------------------------\n\t// If lstr_res = \"OK\" Then lstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Viejo)\n\t// ------------------------------------------------------\n\t// ABM de Cabecera\n\t// ------------------------------------------------------\n\tif (lstr_res == \"OK\")\n\t{\n\t\tlsql = new CVM.Sql(mTablaConfig.cd_tabla);\n\t{\n\t\tref var withBlock =ref lsql;\n\t\tif (this.Ope.SqlConSET)\n\t\t{\n\t\tps_set_default(true, pCnn, pTrn);\n\t\tps_set_campos(lsql);\n\t}\n\tif (this.Ope.SqlConWHERE)\n\t\t{\n\t\twithBlock.w_WHERE(withBlock.SqlCondicion_ID(mTablaConfig.campo_id, this.ID));\n\t\t}\n\t\tlstr_res = withBlock.Ejecutar(this.Ope.OpeSQL, pCnn, pTrn, mTablaConfig.lg_identity, llng_identity);\n\t\tif (lstr_res == \"OK\" & this.Ope.EsAlta & mTablaConfig.lg_identity)\n\t\t\tthis.ID = llng_identity;\n\t\t}\n\tlsql = default;\n\t//------------------------------------------------------\n\t// CE registro NUEVO\n\t// ------------------------------------------------------\n\t// If lstr_res = \"OK\" Then lstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Nuevo)\n\t// -- --------------------------------------------------\n\t// -- cierro\n\t// -- --------------------------------------------------\n\t\tlstr_res = CVM.BdSql.CerrarOperacion(pCnn, pTrn, true, true, lstr_res == \"OK\", lstr_res);\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "ref DataRow",
+          "nombre": "pReg"
+        }
+      ],
+      "contenido": "\n\tstring lstr_res = \"OK\";\n {\n\tvar withBlock = this;\n\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\nCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\tCVM.DRSet.Lng(pReg, \"CFMDMES\", \twithBlock.cfmdmes);\nCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", \twithBlock.cprocesoau);\nCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "PuedeActualizar",
+      "tipo": "bool",
+      "parametros": [],
+      "contenido": "\n\tmValida = new CVM.Validar();\n\t// -- ----------------------------------------\n\t// -- VALIDACION\n\t// -- ----------------------------------------\n\t// -- ALTA o MODIFICA\n\tif (this.Ope.EsAltaOModi)\n\t{\n\t\tps_ValidarRepetido(); // MMM antes Existe\n\t\tif (mValida.TodoOK)\n\t\t{\n\t\t\t// mobj_valida.ValidarRequerido(Me.cd_tabla, \"T\", \"Tabla\")\n\t\t\t// mobj_valida.ValidarRequerido(Me.ds_mensaje, \"T\", \"Mensaje\")\n\t\t}\n\t}\n\t// -- BAJA\n\telse if (this.Ope.EsBaja)\n\t{\n\t\tps_PuedeEliminar();\t\n}\n\telse if (this.Ope.EsAnula)\n\t{\n\t\tps_PuedeAnular();\n\t}\n\telse if (this.Ope.EsActiva)\n\t{\n\t\tps_PuedeActivar();\n\t}\n\n\tmbln_puede_actualizar = !mValida.HayErrores;\n\t// -- ----------------------------------------\n\t// -- Muestro Resultado\n\t// -- Si no quiero mostrar, agregar parametro\n\t// -- ----------------------------------------\n\treturn mValida.MostrarResultado();\n"
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_PuedeEliminar",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_PuedeAnular",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_PuedeActiva",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_ValidarRepetido",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_set_default",
+      "tipo": "void",
+      "parametros": [
+        {
+          "tipo": "bool",
+          "nombre": "pbln_PreActualizar = false"
+        },
+        {
+          "tipo": "SqlClient.SqlConnection",
+          "nombre": "pCnn = default"
+        },
+        {
+          "tipo": " SqlClient.SqlTransaction",
+          "nombre": "pTrn = default"
+        }
+      ],
+      "contenido": "\t{\n\t\tref var withBlock = ref this;\n\t\tif (pbln_PreActualizar)\n\t\t{\n\t\t\tif (this.Ope.EsAlta)\n\t\t\t{\n\t\t\t\twithBlock.ID = mTablaConfig.ProximoID(pCnn, pTrn);\n\t\t\t}\n\t\t}\n\t}\n"
+    },
+    {
+      "alcance": "private",
+      "nombre": "ps_set_campos",
+      "tipo": "void",
+      "parametros": [
+        {
+          "tipo": "CVM.Sql",
+          "nombre": "psql"
+        }
+      ],
+      "contenido": "\tif (this.Ope.EsAlta)\n\t{\n\t\tpsql.q_SET(\"ID_CET006\", this.ID, default, !mTablaConfig.lg_identity);\n\t}\n\tpsql.q_SET(\"FDDJJLIVA\", this.fddjjliva, \"N\");\n\tpsql.q_SET(\"CCORPOR\", this.ccorpor, \"T\");\n\tpsql.q_SET(\"CFMES\", this.cfmes, \"N\");\n\tpsql.q_SET(\"CFMDEX\", this.cfmdex, \"N\");\n\tpsql.q_SET(\"AJUCFMDEX\", this.ajucfmdex, \"N\");\n\tpsql.q_SET(\"DFMES\", this.dfmes, \"N\");\n\tpsql.q_SET(\"VGMES\", this.vgmes, \"N\");\n\tpsql.q_SET(\"IEEMES\", this.ieemes, \"N\");\n\tpsql.q_SET(\"VENMES\", this.venmes, \"N\");\n\tpsql.q_SET(\"CIEJER\", this.ciejer, \"N\");\n\tpsql.q_SET(\"PIMES\", this.pimes, \"N\");\n\tpsql.q_SET(\"ACMES\", this.acmes, \"N\");\n\tpsql.q_SET(\"CFMDMES\", this.cfmdmes, \"N\");\n\tpsql.q_SET(\"CFMRMES\", this.cfmrmes, \"N\");\n\tpsql.q_SET(\"CUSUARIO\", this.cusuario, \"T\");\n\tpsql.q_SET(\"FACTUALZ\", this.factualz, \"N\");\n\tpsql.q_SET(\"HSACTUALZ\", this.hsactualz, \"N\");\n\tpsql.q_SET(\"CPROCESOAU\", this.cprocesoau, \"T\");\n\tpsql.q_SET(\"FACTUALZAU\", this.factualzau, \"N\");\n\tpsql.q_SET(\"HSACTUALZA\", this.hsactualza, \"N\");\n"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDefaultAlta",
+      "tipo": "void",
+      "parametros": [
+        {
+          "tipo": "int",
+          "nombre": "pint_id_periodo"
+        },
+        {
+          "tipo": "string",
+          "nombre": "pstr_ccorpor"
+        }
+      ],
+      "contenido": "\t{\n\t\tref var withBlock = ref this;\n\t\twithBlock.id_cet006 = 0;\n\t\twithBlock.fddjjliva = pint_id_periodo;\n\t\twithBlock.ccorpor = pstr_ccorpor;\n\t\twithBlock.cusuario = CVM.RT.Usuario.cd_usuario;\n\t\twithBlock.factualz = CVM.RT.Hoy(\"YYYYMMDD\");\n\t\twithBlock.hsactualz = CVM.RT.Hora(\"HHMMSS\");\n\t\twithBlock.cprocesoau = withBlock.cusuario;\n\t\twithBlock.factualzau = withBlock.factualz;\n\t\twithBlock.hsactualza = withBlock.hsactualz;\n\t}"
+    },
+    {
+      "alcance": "public",
+      "nombre": "Ope",
+      "tipo": "CVM.ABMope",
+      "parametros": [],
+      "contenido": "\tget\n\t{\n\t\treturn this.mOpe;\n\t}"
+    },
+    {
+      "alcance": "public",
+      "nombre": "tp_ope",
+      "tipo": "string",
+      "parametros": [],
+      "contenido": "\tget\n\t{\n\t\treturn this.Ope.tp_ope;\n\t}"
+    },
+    {
+      "alcance": "public",
+      "nombre": "Valida",
+      "tipo": "CVM.Validar",
+      "parametros": [],
+      "contenido": "\tget\n\t{\n\t\treturn this.mValida;\t\n}"
+    }
+  ]
+}

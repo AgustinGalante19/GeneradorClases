@@ -1,0 +1,7 @@
+{
+  "alcance": "public",
+  "nombre": "",
+  "tipo": "void",
+  "parametros": [],
+  "contenido": "\nvar withBlock = mTablaConfig;\nwithBlock.lg_identity = true;\n withBlock.cd_tabla = Cet006.TablaOL;\n withBlock.ds_vista = Cet006.TablaOL;\n withBlock.campo_id = \"\";\n withBlock.campo_cd = \"\"; withBlock.campo_ds = \"\"; \n ps_set_default();\n"
+}
