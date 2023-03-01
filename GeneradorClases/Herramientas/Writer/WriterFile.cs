@@ -39,32 +39,36 @@ namespace GeneradorClases.Herramientas.Writer
 		{
 
 			Escribir("\n");
-			Escribir(metodo.alcance + " " + metodo.tipo + " " + classname);
+			Escribir("\t" + metodo.alcance + " " + metodo.tipo + " " + classname);
 			Escribir("(");
-			for (int i = 0; i <= metodo.parametros.Count -1; i++)
+			for (int i = 0; i <= metodo.parametros.Count - 1; i++)
 			{
-				if (metodo.parametros.Count -1 == i)
+				if (metodo.parametros.Count - 1 == i)
 				{
 					Escribir(metodo.parametros[i].tipo + " " + metodo.parametros[i].nombre);
 				}
 				else
 				{
 					Escribir(metodo.parametros[i].tipo + " " + metodo.parametros[i].nombre + ", ");
-				}										
+				}
 			}
 			Escribir(")");
+			string[] content = metodo.contenido.Split(Convert.ToChar("\n"));
+			for (int i = 0; i < content.Length; i++)
+			{
+				content[i] = "\t" + content[i];
+			}
 
+			string newContent = string.Join("\n", content);
 			Escribir(
 				 " \n"
-				+ "{ " +
+				+ "\t{ " +
 				"  \n" +
-
-				metodo.contenido
-
+				newContent
 				+ " \n"
-				+ "}"
+				+ "\t}"
 				);
-			
+
 		}
 
 		public void CrearMetodos(List<Metodo> lst_metodos)
@@ -73,7 +77,7 @@ namespace GeneradorClases.Herramientas.Writer
 			foreach (var metodo in lst_metodos)
 			{
 				Escribir("\n");
-				Escribir("\t"+metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
+				Escribir("\t" + metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
 				Escribir("(");
 				for (int i = 0; i <= metodo.parametros.Count - 1; i++)
 				{
@@ -88,14 +92,14 @@ namespace GeneradorClases.Herramientas.Writer
 				}
 				Escribir(")");
 				string[] content = metodo.contenido.Split(Convert.ToChar("\n"));
-				for(int i = 0; i < content.Length; i++)
+				for (int i = 0; i < content.Length; i++)
 				{
 					content[i] = "\t" + content[i];
 				}
 
 				string newContent = string.Join("\n", content);
 
-                Escribir(
+				Escribir(
 					 " \n"
 					+ "\t{" +
 					"  \n" +
@@ -110,24 +114,25 @@ namespace GeneradorClases.Herramientas.Writer
 		{
 			resultados.RemoveAt(resultados.Count - 1);
 
-			foreach(var resultado in resultados)
+			resultados.ForEach(resultado =>
 			{
-				if(resultado.Tipo_Resultado.ToLower() == "string")
+				if (resultado.Tipo_Resultado.ToLower() == "string" && resultado.default_value != null)
 				{
-					resultado.default_value.ToString();
+					Escribir("\n\tprivate " + resultado.Tipo_Resultado.ToLower() + " " + resultado.Variable_Resultado.ToLower().Trim() + " = " + "\"" + resultado.default_value + "\" ;");
 				}
-			}
-
-			resultados.ForEach(resultado => Escribir("\n\tprivate " + resultado.Tipo_Resultado.ToLower() + " " + resultado.Variable_Resultado.ToLower() + " = " + resultado.default_value  + " ;"));
+				else
+				{
+					Escribir("\n\tprivate " + resultado.Tipo_Resultado.ToLower() + " " + resultado.Variable_Resultado.ToLower().Trim() + " = " + resultado.default_value + " ;");
+				}
+			});
 		}
 		public void CrearPropiedades(List<CampoClase> properties)
 		{
-			
+
 			Escribir("\n");
-			properties.ForEach(propertie => Escribir("\n\t" + "public " + propertie.Tipo_Resultado.ToLower() + " " + propertie.campo.ToLower() + " { get => " +propertie.Variable_Resultado+ "; set => " + propertie.Variable_Resultado + " = value;}"));
+			properties.ForEach(propertie => Escribir("\n\t" + "public " + propertie.Tipo_Resultado.ToLower() + " " + propertie.campo.ToLower().Trim() + " { get => " + propertie.Variable_Resultado.Trim() + "; set => " + propertie.Variable_Resultado.Trim() + " = value;}"));
 			Escribir("\n");
 		}
-		
 		public void Fin()
 		{
 			Escribir("\n}");
