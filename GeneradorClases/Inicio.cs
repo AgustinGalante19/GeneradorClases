@@ -88,7 +88,12 @@ namespace GeneradorClases
             {
                 WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
-                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"C:\Users\agust\source\repos\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
+                string currentPath = Directory.GetCurrentDirectory();
+                currentPath = currentPath.Replace("bin", "");
+                currentPath = currentPath.Replace("Debug", "");
+                string jsonPath = currentPath + "JsonFiles//Method.json";
+
+                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(jsonPath));
 
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
 				writer.CrearVariables(resultados);
