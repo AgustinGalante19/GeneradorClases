@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,16 +12,17 @@ namespace GeneradorClases.Herramientas.Writer
 {
 	public class WriterFile
 	{
-		FileStream fs;
+		FileStream Fs;
+
 		public WriterFile(string pathFile)
 		{
-			fs = File.Create(pathFile);
+			Fs = File.Create(pathFile);
 		}
 
 		private void Escribir(string text)
 		{
 			//text += "\n";
-			fs.Write(Encoding.ASCII.GetBytes(text), 0, Encoding.ASCII.GetBytes(text).Length);
+			Fs.Write(Encoding.ASCII.GetBytes(text), 0, Encoding.ASCII.GetBytes(text).Length);
 		}
 
 		public void CrearClase(string nombre, Metodo metodo)
@@ -104,28 +106,32 @@ namespace GeneradorClases.Herramientas.Writer
 			}
 		}
 
-		public void CrearPropiedades(List<Resultados> properties)
+		public void CrearVariables(List<CampoClase> resultados)
 		{
+			resultados.RemoveAt(resultados.Count - 1);
+
+			foreach(var resultado in resultados)
+			{
+				if(resultado.Tipo_Resultado.ToLower() == "string")
+				{
+					resultado.default_value.ToString();
+				}
+			}
+
+			resultados.ForEach(resultado => Escribir("\n\tprivate " + resultado.Tipo_Resultado.ToLower() + " " + resultado.Variable_Resultado.ToLower() + " = " + resultado.default_value  + " ;"));
+		}
+		public void CrearPropiedades(List<CampoClase> properties)
+		{
+			
 			Escribir("\n");
-			properties.RemoveAt(properties.Count -1);
-			properties.ForEach(propertie => Escribir("\n\t" + "private " + propertie.Tipo_Resultado.ToLower() + " " + propertie.Variable_Resultado + ";"));
+			properties.ForEach(propertie => Escribir("\n\t" + "public " + propertie.Tipo_Resultado.ToLower() + " " + propertie.campo.ToLower() + " { get => " +propertie.Variable_Resultado+ "; set => " + propertie.Variable_Resultado + " = value;}"));
 			Escribir("\n");
 		}
-
-		public void CrearVariables()
-		{
-			Escribir("		Variable1");
-			Escribir("		Variable2");
-			Escribir("		Variable3");
-			Escribir("		Variable4");
-
-			Escribir("-----------");
-		}
-
+		
 		public void Fin()
 		{
 			Escribir("\n}");
-			fs.Close();
+			Fs.Close();
 		}
 
 	}

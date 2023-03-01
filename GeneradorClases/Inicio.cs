@@ -19,7 +19,7 @@ namespace GeneradorClases
 {
     public partial class Inicio : Form
     {
-        public Inicio()
+		public Inicio()
         {
             InitializeComponent();
         }
@@ -66,13 +66,15 @@ namespace GeneradorClases
 
 
 					CrearClase(lst_campos.Select(x =>
-					 new Resultados()
+					 new CampoClase()
 					 {
 						 Parametro_Resultado = x.Parametro_Resultado,
 						 Tipo_Resultado = x.Tipo_Resultado,
-						 Variable_Resultado = x.Variable_Resultado
+						 Variable_Resultado = x.Variable_Resultado,
+                         campo = x.campo,
+                         default_value= x.default_value,
 					 }
-					).ToList<Resultados>());
+					).ToList<CampoClase>());
                 }
                 else if (lstr_result != "")
                 {
@@ -80,19 +82,19 @@ namespace GeneradorClases
                 }
             }
         }
-        private void CrearClase(List<Resultados> properties)
-        {
-            try
+        private void CrearClase(List<CampoClase> resultados)
+        {			
+			try
             {
                 WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
 
                 CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(@"D:\Trabajo\GeneradorClases\GeneradorClases\JsonFiles\Method.json"));
 
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
-				writer.CrearPropiedades(properties);
-				writer.CrearMetodos(_Method.Metodos);                
-             
-                //writer.CrearVariables();                
+				writer.CrearVariables(resultados);
+				writer.CrearPropiedades(resultados);
+				writer.CrearMetodos(_Method.Metodos);                             
+                              
                 writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);
