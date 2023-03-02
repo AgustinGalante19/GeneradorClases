@@ -1,9 +1,11 @@
 ﻿using GeneradorClases.Herramientas.Writer.Interface;
 using GeneradorClases.Modelos;
+using GeneradorClases.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +14,9 @@ namespace GeneradorClases.Herramientas.Writer
 {
 	public class WriterFile
 	{
-		FileStream Fs;
 
+		FileStream Fs;
+		public const string xd = "ASDASD";
 		public WriterFile(string pathFile)
 		{
 			Fs = File.Create(pathFile);
@@ -21,21 +24,24 @@ namespace GeneradorClases.Herramientas.Writer
 
 		private void Escribir(string text)
 		{
-			//text += "\n";
 			Fs.Write(Encoding.ASCII.GetBytes(text), 0, Encoding.ASCII.GetBytes(text).Length);
 		}
 
-		public void CrearClase(string nombre, Metodo metodo)
+		public void CrearClase(string nombre, Metodo metodo, List<Constant> lst_constantes, List<Modelos.Object> lst_objects)
 		{
 			Escribir("public class " + nombre);
 			Escribir("\n");
 			Escribir("{");
 			Escribir("\n");
 
-			GenerarContructores(metodo, nombre);
+			lst_objects.ForEach(objecto => {
+				Escribir("\n\t" + objecto.alcance + " " + objecto.tipo + " " + objecto.nombre + ";");
+			});
+			GenerarConstantes(lst_constantes);
+            GenerarContructores(metodo, nombre, lst_objects);
 		}
 
-		private void GenerarContructores(Metodo metodo, string classname)
+		private void GenerarContructores(Metodo metodo, string classname, List<Modelos.Object> lst_objects)
 		{
 
 			Escribir("\n");
@@ -53,25 +59,71 @@ namespace GeneradorClases.Herramientas.Writer
 				}
 			}
 			Escribir(")");
+
 			string[] content = metodo.contenido.Split(Convert.ToChar("\n"));
 			for (int i = 0; i < content.Length; i++)
 			{
 				content[i] = "\t" + content[i];
 			}
-
 			string newContent = string.Join("\n", content);
 			Escribir(
 				 " \n"
 				+ "\t{ " +
 				"  \n" +
 				newContent
-				+ " \n"
-				+ "\t}"
-				);
+			);
+			GenerarObjetos(lst_objects);
+			Escribir("\n\t}");
 
+
+        }
+
+		public void GenerarObjetos(List<Modelos.Object> lst_obj)
+		{
+			lst_obj.ForEach(objeto =>
+			{
+				if (objeto.tipo == "bool")
+				{
+                    Escribir("\n\t\t" + objeto.nombre + " = false;");
+                }
+				else
+				{
+                    Escribir("\n\t\t" + objeto.nombre + " = new " + objeto.tipo + "();");
+                }
+			});
 		}
 
-		public void CrearMetodos(List<Metodo> lst_metodos)
+        public void GenerarConstantes(List<Constant> lst_constantes)
+        {
+			lst_constantes.ForEach(constante =>
+			{
+				if(constante.tipo == "string")
+				{
+                    Escribir("\n\t"
+                    + constante.alcance
+                    + " const "
+                    + constante.tipo
+                    + " "
+                    + constante.nombre
+                    + " = \""
+                    + constante.valor
+                    + "\";");
+				}
+				else
+				{
+                    Escribir("\n\t"
+                    + constante.alcance
+                    + " const "
+                    + constante.tipo
+                    + " "
+                    + constante.nombre
+                    + " = "
+                    + constante.valor
+                    + ";");
+                }
+			});
+        }
+        public void CrearMetodos(List<Metodo> lst_metodos)
 		{
 			lst_metodos.RemoveAt(0);//elimino el constructor
 			foreach (var metodo in lst_metodos)

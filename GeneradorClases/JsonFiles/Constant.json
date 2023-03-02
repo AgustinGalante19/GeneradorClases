@@ -1,0 +1,16 @@
+{
+  "Constantes": [
+      {
+        "alcance": "public",
+        "tipo": "string",
+        "nombre": "TablaOL",
+        "valor": "Cet006"
+    },
+    {
+      "alcance": "public",
+      "tipo": "string",
+      "nombre": "TablaCC",
+      "valor": "CET006CECET006CE"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Objetos": [
+    {
+      "alcance": "private",
+      "tipo": "CVM.ABMope",
+      "nombre": "TablaCC",
+      "valor": "new CVM.ABMope();"
+    },
+    {
+      "alcance": "private",
+      "tipo": "CVM.TablaConfig",
+      "nombre": "mTablaConfig",
+      "valor": "new CVM.TablaConfig();"
+    },
+    {
+      "alcance": "private",
+      "tipo": "CVM.TablaLog",
+      "nombre": "mTablaLog",
+      "valor": "new CVM.TablaLog();"
+    },
+    {
+      "alcance": "private",
+      "tipo": "CVM.Validar",
+      "nombre": "mValida",
+      "valor": "new CVM.Validar()"
+    },
+    {
+      "alcance": "private",
+      "tipo": "bool",
+      "nombre": "mbln_puede_actualizar",
+      "valor": "false"
+    }
+  ]
+}

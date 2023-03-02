@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Modelos\CampoClase.cs" />
     <Compile Include="Modelos\CVM_Constant.cs" />
+    <Compile Include="Modelos\CVM_Object.cs" />
     <Compile Include="Modelos\CVM_Propertie.cs" />
     <Compile Include="Modelos\CVM_Method.cs" />
     <Compile Include="Program.cs" />
@@ -90,7 +91,9 @@
       <DependentUpon>TablaText.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="JsonFiles\Constructor.json" />
+    <None Include="JsonFiles\Constant.json" />
     <None Include="JsonFiles\Method.json" />
+    <None Include="JsonFiles\Objects.json" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GeneradorClases.Modelos.CampoClase.datasource" />
     <None Include="Properties\DataSources\GeneradorClases.Modelos.CampoClase1.datasource" />

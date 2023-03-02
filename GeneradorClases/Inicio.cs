@@ -91,15 +91,16 @@ namespace GeneradorClases
                 string currentPath = Directory.GetCurrentDirectory();
                 currentPath = currentPath.Replace("bin", "");
                 currentPath = currentPath.Replace("Debug", "");
-                string jsonPath = currentPath + "JsonFiles//Method.json";
+                string methodsJsonPath = currentPath + "JsonFiles//Method.json";
+                
+                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(methodsJsonPath));
+                CVM_Constant _Constant = JsonConvert.DeserializeObject<CVM_Constant>(File.ReadAllText(currentPath + "JsonFiles//Constant.json"));
+                CVM_Object _Objects = JsonConvert.DeserializeObject<CVM_Object>(File.ReadAllText(currentPath + "JsonFiles//Objects.json"));
 
-                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(jsonPath));
-
-                writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First());
-				writer.CrearVariables(resultados);
+                writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First(), _Constant.Constantes, _Objects.objetos);
+                writer.CrearVariables(resultados);
 				writer.CrearPropiedades(resultados);
-				writer.CrearMetodos(_Method.Metodos);                             
-                              
+                writer.CrearMetodos(_Method.Metodos); 
                 writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);
@@ -109,6 +110,7 @@ namespace GeneradorClases
                 MessageBox.Show(ex.Message);
             }
         }
+
         public List<CampoClase> CalcularTipos(List<CampoClase> lst_campos)
         {
             Campo obj_campo = new Campo();
