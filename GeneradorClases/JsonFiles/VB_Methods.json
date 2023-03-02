@@ -1,0 +1,193 @@
+{
+  "Metodos": [
+    {
+      "alcance": "public",
+      "nombre": "",
+      "tipo": "void",
+      "parametros": [],
+      "contenido": "\tWith mTablaConfig \n\t\t.lg_identity = True \n\t\t.cd_tabla = Cet006 \n\t\t.TablaOL.ds_vista = Cet006 \n\t\t.TablaOL.campo_id = \"\" \n\t\t.campo_cd = \"\" \n\t\t.campo_ds = \"\" \n\tEnd With \n\t'MiLayout = TAX.RN.Layouts.Layout(cet006.TablaOL) \n\tps_set_default() \n\tps_armo_AK()"
+    },
+    {
+      "alcance": "public",
+      "nombre": "Cargar",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "long",
+          "nombre": "plng_ID = 0"
+        },
+        {
+          "tipo": "CVM.ABMope",
+          "nombre": "plng_ID = null"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_EsCopia = false"
+        }
+      ],
+      "contenido": "\tDim lsql As CVM.SqlDim \n\tlstr_res As String = \"\" \n\tIf plng_ID <> 0 Then Me.ID = plng_ID \n\tIf Me.ID = 0 Then Return \"Parámetros Insuficientes\" \n\tlsql = New CVM.Sql \n\tWith lsql \n\t\t.q_SELECT(\"v1.*\") \n\t\t.q_FROM(mTablaConfig.ds_vista, \"V1\") \n\t\t.w_WHERE(.SqlCondicion_ID(mTablaConfig.campo_id(\"v1\"), Me.ID)) \n\tEnd With \n\tlstr_res = Me.CargarDesdeSQL(lsql) \n\tlsql = Nothing \n\tIf pbln_EsCopia Then \n\t\t'Me.CargarDefaultAlta() \n\tEnd If \n\tReturn lstr_res"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeSQL",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "CVM.Sql",
+          "nombre": "psql"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_DebeExistir  = true"
+        }
+      ],
+      "contenido": "\tDim lTab As New DataTableDim \n\tlstr_res As String = \"\" \n\tWith psql \n\t\tlstr_res = .EjecutarDT(lTab)\n\tEnd With\n\tIf lstr_res = \"OK\" Then\n\t\tlstr_res = Me.CargarDesdeDR(lTab, pbln_DebeExistir)\n\tEnd If \n\tlTab = NothingReturn lstr_res"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "DataTable",
+          "nombre": "pTab"
+        },
+        {
+          "tipo": "bool",
+          "nombre": "pbln_DebeExistir"
+        }
+      ],
+      "contenido": "\tDim lstr_res As String = \"OK\"\n\tIf pTab.Rows.Count > 0 Then\n\t\tlstr_res = Me.CargarDesdeDR(pTab.Rows(0))\n\tElseIf pbln_DebeExistir Then\n\t\tlstr_res = \"No Existen Registros\"\n\tEnd IfReturn lstr_res"
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDesdeDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "DataRow",
+          "nombre": "pReg"
+        }
+      ],
+      "contenido": ""
+    },
+    {
+      "alcance": "public",
+      "nombre": "CargarDR",
+      "tipo": "string",
+      "parametros": [
+        {
+          "tipo": "DataRow",
+          "nombre": "pReg"
+        }
+      ],
+      "contenido": ""
+    },
+    {
+      "alcance": "public",
+      "nombre": "Actualizar",
+      "tipo": "string",
+      "parametros": [],
+      "contenido": "\tDim lsql As CVM.Sql \n\tDim llng_identity As Long = -1\n\tDim pCnn As SqlClient.SqlConnection = Nothing\n\tDim pTrn As SqlClient.SqlTransaction = Nothing\n\tDim lstr_res As String = \"OK\"\n\tIf Not mbln_puede_actualizar Then\n\t\tReturn \"Validación Pendiente\"\n\tEnd If\n\t'If Me.Ope.EsAnula Or Me.Ope.EsActiva Then\n\t\t' Return pf_act_estado(Me.Ope.EsAnula, Me.Ope.EsActiva)\n\t'End If\n\t'-- --------------------------------------------------\n\t'-- apertura de base de datos\n\t'-- --------------------------------------------------\n\tlstr_res = CVM.BdSql.IniciarOperacion(pCnn, pTrn, True, True)\n\t'------------------------------------------------------\n\t' Elimino tablas asociadas\n\t'------------------------------------------------------\n\t'If lstr_res = \"OK\" AndAlso Me.Ope.EsBaja Then\n\t\t' lstr_res = pf_EliminarRelaciones(pCnn, pTrn)\n\t'End If\n\t'------------------------------------------------------\n\t' CE registro VIEJO\n\t'------------------------------------------------------\n\t'If lstr_res = \"OK\" Then \n\t\tlstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Viejo)\n\t'------------------------------------------------------\n\t' ABM de Cabecera\n\t'------------------------------------------------------\n\tIf lstr_res = \"OK\" Then\n\t\tlsql = New CVM.Sql(mTablaConfig.cd_tabla)\n\t\tWith lsql\n\t\tIf Me.Ope.SqlConSET Then\n\t\t\tps_set_default(True, pCnn, pTrn)\n\t\t\tps_set_campos(lsql)\n\t\tEnd If\n\t\tIf Me.Ope.SqlConWHERE Then\n\t\t\t.w_WHERE(.SqlCondicion_ID(mTablaConfig.campo_id, Me.ID))\n\t\tEnd If\n\t\tlstr_res = .Ejecutar(Me.Ope.OpeSQL, pCnn, pTrn, mTablaConfig.lg_identity, llng_identity)\n\t\tIf lstr_res = \"OK\" And Me.Ope.EsAlta And mTablaConfig.lg_identity Then Me.ID = llng_identity\n\t\tEnd With\n\t\tlsql = Nothing\n\tEnd If\n\t'------------------------------------------------------\n\t' CE registro NUEVO\n\t'------------------------------------------------------\n\t'If lstr_res = \"OK\" Then lstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Nuevo)\n\t'-- --------------------------------------------------\n\t'-- cierro\n\t'-- --------------------------------------------------\n\tlstr_res = CVM.BdSql.CerrarOperacion(pCnn, pTrn, True, True, (lstr_res = \"OK\"), lstr_res)\n\tReturn lstr_res"
+    },
+    {
+      "alcance": "Public Function",
+      "nombre": "PuedeActualizar",
+      "tipo": "Boolean",
+      "parametros": [],
+      "contenido": "\tmValida = New CVM.Validar\n\t'-- ----------------------------------------\n\t'-- VALIDACION\n\t'-- ----------------------------------------\n\t'-- ALTA o MODIFICA\n\tIf Me.Ope.EsAltaOModi Then\n\t\tps_ValidarRepetido() 'MMM antes Existe\n\t\tIf mValida.TodoOK Then\n\t\t\t'mobj_valida.ValidarRequerido(Me.cd_tabla, \"T\", \"Tabla\")\n\t\t\t'mobj_valida.ValidarRequerido(Me.ds_mensaje,\"T\", \"Mensaje\")\n\tEnd If\n\t'-- BAJA\n\tElseIf Me.Ope.EsBaja Then\n\t\tps_PuedeEliminar()\n\t\t'-- ANULA\n\n\tElseIf Me.Ope.Then\n\t\tps_PuedeAnular()\n\tElseIf Me.Ope.EsActiva Then\n\t\tps_PuedeActivar()\n\tEnd If\n\tmbln_puede_actualizar = (Not mValida.HayErrores)\n\n\t'-- ----------------------------------------\n\t'-- Muestro Resultado\n\t'-- Si no quiero mostrar, agregar parametro\n\t'-- ----------------------------------------\tReturn mValida.MostrarResultado()"
+    },
+    {
+      "alcance": "Private Sub",
+      "nombre": "ps_PuedeEliminar",
+      "tipo": "",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "Private Sub",
+      "nombre": "ps_PuedeAnular",
+      "tipo": "",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "Private Sub",
+      "nombre": "ps_PuedeActivar",
+      "tipo": "",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "Private Sub",
+      "nombre": "ps_ValidarRepetido",
+      "tipo": "",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "Private Sub",
+      "nombre": "ps_set_default",
+      "tipo": "",
+      "parametros": [
+        {
+          "tipo": "Boolean = False",
+          "nombre": "Optional ByVal pbln_PreActualizar"
+        },
+        {
+          "tipo": "SqlClient.SqlConnection = Nothing",
+          "nombre": "Optional ByVal pCnn"
+        },
+        {
+          "tipo": "SqlClient.SqlTransaction = Nothing",
+          "nombre": "Optional ByVal pTrn"
+        }
+      ],
+      "contenido": "\tWith Me\n\t\tIf pbln_PreActualizar Then\n\t\t\tIf Me.Ope.EsAlta Then\n\t\t\t\t.ID = mTablaConfig.ProximoID(pCnn, pTrn)\n\t\t\tEnd If\n\t\tEnd If\n\tEnd With\n"
+    },
+    {
+      "alcance": "Public ReadOnly Property",
+      "nombre": "pst_set_campos",
+      "tipo": "CVM.ABMope",
+      "parametros": [],
+      "contenido": ""
+    },
+    {
+      "alcance": "Public ReadOnly Property",
+      "nombre": "CargarDefaultAlta",
+      "tipo": "CVM.ABMope",
+      "parametros": [
+        {
+          "tipo": "Integer",
+          "nombre": "ByVal pint_id_periodo"
+        },
+        {
+          "tipo": "String",
+          "nombre": "ByVal pstr_ccorpor"
+        }
+      ],
+      "contenido": ""
+    },
+    {
+      "alcance": "Public ReadOnly Property",
+      "nombre": "Ope",
+      "tipo": "CVM.ABMope",
+      "parametros": [],
+      "contenido": "\n\tGet\n\t\tReturn Me.mOpe\n\tEnd Get"
+    },
+    {
+      "alcance": "Public ReadOnly Property",
+      "nombre": "tp_ope",
+      "tipo": "String",
+      "parametros": [],
+      "contenido": "\n\tGet\n\t\tReturn Me.Ope.tp_ope\n\tEnd Get"
+    },
+    {
+      "alcance": "Public ReadOnly Property",
+      "nombre": "Valida",
+      "tipo": "CVM.Validar",
+      "parametros": [],
+      "contenido": "\n\tGet\n\t\tReturn Me.mValida\n\tEnd Get"
+    }
+  ]
+}
