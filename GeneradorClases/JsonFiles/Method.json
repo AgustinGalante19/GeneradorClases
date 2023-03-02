@@ -73,7 +73,7 @@
     },
     {
       "alcance": "public",
-      "nombre": "CargarDesdeDR",
+      "nombre": "CargarDR",
       "tipo": "string",
       "parametros": [
         {
@@ -81,7 +81,7 @@
           "nombre": "pReg"
         }
       ],
-      "contenido": "\n\tstring lstr_res = \"OK\";\n\t{\n\t\tvar withBlock = this;\n\t\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\t\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\t\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\t\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\t\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\t\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\t\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\t\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\n\t\tCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\t\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDMES\", withBlock.cfmdmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\t\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\t\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", withBlock.cprocesoau);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
+      "contenido": "\tstring lstr_res = \"OK\";\n\t{\n\t\tref var withBlock = ref this;\n\t\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\t\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\t\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\t\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\t\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\t\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\t\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\t\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\n\t\tCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\t\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDMES\", withBlock.cfmdmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\t\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\t\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", withBlock.cprocesoau);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
     },
     {
       "alcance": "public",
@@ -89,18 +89,6 @@
       "tipo": "string",
       "parametros": [],
       "contenido": "\n\tCVM.Sql lsql;\n\tlong llng_identity = -1;\n\tSqlClient.SqlConnection pCnn = default;\n\tSqlClient.SqlTransaction pTrn = default;\n\tstring lstr_res = \"OK\";\n\tif (!mbln_puede_actualizar)\n\t{\n\t\treturn \"Validación Pendiente\";\n\t}\n\t// If Me.Ope.EsAnula Or Me.Ope.EsActiva Then\n\t// Return pf_act_estado(Me.Ope.EsAnula, Me.Ope.EsActiva)\n\t// End If\n\t// -- --------------------------------------------------\n\t// -- apertura de base de datos\n\t// -- --------------------------------------------------\n\tlstr_res = CVM.BdSql.IniciarOperacion(pCnn, pTrn, true, true);\n\t// ------------------------------------------------------\n\t// Elimino tablas asociadas\n\t// ------------------------------------------------------\n\t// If lstr_res = \"OK\" AndAlso Me.Ope.EsBaja Then\n\t// lstr_res = pf_EliminarRelaciones(pCnn, pTrn)\n\t// End If\n\t// ------------------------------------------------------\n\t// CE registro VIEJO\n\t// ------------------------------------------------------\n\t// If lstr_res = \"OK\" Then lstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Viejo)\n\t// ------------------------------------------------------\n\t// ABM de Cabecera\n\t// ------------------------------------------------------\n\tif (lstr_res == \"OK\")\n\t{\n\t\tlsql = new CVM.Sql(mTablaConfig.cd_tabla);\n\t\t{\n\t\t\tref var withBlock = ref lsql;\n\t\t\tif (this.Ope.SqlConSET)\n\t\t\t{\n\t\t\t\tps_set_default(true, pCnn, pTrn);\n\t\t\t\tps_set_campos(lsql);\n\t\t\t}\n\t\t\tif (this.Ope.SqlConWHERE)\n\t\t\t{\n\t\t\t\twithBlock.w_WHERE(withBlock.SqlCondicion_ID(mTablaConfig.campo_id, this.ID));\n\t\t\t}\n\t\t\tlstr_res = withBlock.Ejecutar(this.Ope.OpeSQL, pCnn, pTrn, mTablaConfig.lg_identity, llng_identity);\n\t\t\tif (lstr_res == \"OK\" & this.Ope.EsAlta & mTablaConfig.lg_identity)\n\t\t\t\tthis.ID = llng_identity;\n\t\t}\n\t\tlsql = default;\n\t}\n\t\t//------------------------------------------------------\n\t\t// CE registro NUEVO\n\t\t// ------------------------------------------------------\n\t\t// If lstr_res = \"OK\" Then lstr_res = mfstr_ce(pCnn, pTrn, CVM.Cons.CE_Registro.Nuevo)\n\t\t// -- --------------------------------------------------\n\t\t// -- cierro\n\t\t// -- --------------------------------------------------\n\tlstr_res = CVM.BdSql.CerrarOperacion(pCnn, pTrn, true, true, lstr_res == \"OK\", lstr_res);\n\treturn lstr_res;\n"
-    },
-    {
-      "alcance": "public",
-      "nombre": "CargarDesdeDR",
-      "tipo": "string",
-      "parametros": [
-        {
-          "tipo": "ref DataRow",
-          "nombre": "pReg"
-        }
-      ],
-      "contenido": "\n\tstring lstr_res = \"OK\";\n\t{\n\tvar withBlock = this;\n\t\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\t\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\t\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\t\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\t\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\t\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\t\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\t\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\n\t\tCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\t\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDMES\", \twithBlock.cfmdmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\t\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\t\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", \twithBlock.cprocesoau);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
     },
     {
       "alcance": "public",
