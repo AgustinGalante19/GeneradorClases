@@ -66,6 +66,7 @@
     <Compile Include="Modelos\CVM_Object.cs" />
     <Compile Include="Modelos\CVM_Propertie.cs" />
     <Compile Include="Modelos\CVM_Method.cs" />
+    <Compile Include="Modelos\Propertie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TablaText.cs">

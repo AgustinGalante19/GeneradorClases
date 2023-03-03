@@ -73,6 +73,7 @@ namespace GeneradorClases
 						 Variable_Resultado = x.Variable_Resultado,
                          campo = x.campo,
                          default_value= x.default_value,
+                         Abr_sigla_Resultado = x.Abr_sigla_Resultado
 					 }
 					).ToList<CampoClase>());
                 }
@@ -100,7 +101,15 @@ namespace GeneradorClases
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First(), _Constant.Constantes, _Objects.objetos);
                 writer.CrearVariables(resultados);
 				writer.CrearPropiedades(resultados);
-				writer.CrearMetodos(_Method.Metodos, new List<string>(resultados.Select(x => x.campo.Trim()).ToList())); 
+                List<Propertie> lst_props = new List<Propertie>();
+                resultados.ForEach(res =>
+                {
+                    lst_props.Add(new Propertie() { 
+                        name = res.campo.Trim(),
+                        Abr_tipo = res.Abr_sigla_Resultado 
+                    });
+                });
+				writer.CrearMetodos(_Method.Metodos, lst_props); 
 				writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);

@@ -123,14 +123,14 @@ namespace GeneradorClases.Herramientas.Writer
                 }
 			});
         }
-        public void CrearMetodos(List<Metodo> lst_metodos, List<string> CampoClase)
+        public void CrearMetodos(List<Metodo> lst_metodos, List<Propertie> CampoClase)
 		{
 			lst_metodos.RemoveAt(0);//elimino el constructor
 			foreach (var metodo in lst_metodos)
 			{
 				Escribir("\n");
 				Escribir("\t" + metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
-				Escribir("(");		
+				Escribir("(");
 
 				//Inserto los parametros
 				for (int i = 0; i <= metodo.parametros.Count - 1; i++)
@@ -152,17 +152,56 @@ namespace GeneradorClases.Herramientas.Writer
 					case "CargarDesdeDR":
 						if (metodo.parametros.First().nombre == "pReg")
 						{
+
 							//cantidad de referencias
-							var ContenidoReplace = metodo.contenido;
+							string ContenidoReplace = metodo.contenido;
 							for (int i = 0; i < CampoClase.Count; i++)
 							{
-								metodo.contenido = metodo.contenido.Replace("[NombrePropiedad]", CampoClase[i].ToLower());
-								metodo.contenido = metodo.contenido.Replace("[TagPropiedad]", CampoClase[i]);
+								metodo.contenido = metodo.contenido.Replace("[NombrePropiedad]", CampoClase[i].name.ToLower());
+								metodo.contenido = metodo.contenido.Replace("[TagPropiedad]", CampoClase[i].name);
 
 								if (i != CampoClase.Count - 1)
 								{
 									metodo.contenido = metodo.contenido + ContenidoReplace;
 								}
+							}
+						}
+						break;
+
+					case "CargarDR":
+						string CargarDRReplace = metodo.contenido;
+						for (int i = 0; i < CampoClase.Count; i++)
+						{
+							metodo.contenido = metodo.contenido.Replace("[NombrePropiedad]", CampoClase[i].name.ToLower());
+							metodo.contenido = metodo.contenido.Replace("[TagPropiedad]", CampoClase[i].name);
+
+							if (i != CampoClase.Count - 1)
+							{
+								metodo.contenido = metodo.contenido + CargarDRReplace;
+							}
+						}
+						break;
+					case "ps_set_campos":
+						string setDefaultReplace = metodo.contenido;
+						for (int i = 0; i < CampoClase.Count; i++)
+						{
+							if(i == 0)
+							{
+								metodo.contenido = metodo.contenido.Replace("[CondicionalID]", "\n\tif (this.Ope.EsAlta)\n\t{\n\t\tpsql.q_SET(\"[TagID]\", this.ID, default, !mTablaConfig.lg_identity);\n\t}");
+                                metodo.contenido = metodo.contenido.Replace("[TagID]", CampoClase[i].name);
+                                metodo.contenido = metodo.contenido.Replace("[CondicionalID]", " ");
+                            }
+							else
+							{
+								metodo.contenido = metodo.contenido.Replace("[CondicionalID]", " ");
+                                metodo.contenido = metodo.contenido.Replace("[NombrePropiedad]", CampoClase[i].name.ToLower());
+                                metodo.contenido = metodo.contenido.Replace("[TagPropiedad]", CampoClase[i].name);
+                                metodo.contenido = metodo.contenido.Replace("[TipoPropiedad]", CampoClase[i].Abr_tipo);
+                            }
+
+                            if (i != CampoClase.Count - 1)
+							{
+								metodo.contenido = metodo.contenido + setDefaultReplace;
 							}
 						}
 						break;
@@ -175,16 +214,21 @@ namespace GeneradorClases.Herramientas.Writer
 					content[i] = "\t" + content[i];
 				}
 
-				string newContent = string.Join("\n", content);
-
-				Escribir(
+				if (metodo.nombre == "CargarDR" || (metodo.nombre == "CargarDesdeDR" && metodo.parametros.First().nombre == "pReg"))
+				{ 
+					content[0] += "\n\t\tstring lstr_res = \"OK\";\n";
+					content[content.Length - 1] += "\n\t\treturn lstr_res;\n";
+				}
+				
+                string newContent = string.Join("\n", content);
+                Escribir(
 					 " \n"
 					+ "\t{" +
 					"  \n" +
 					newContent
 					+ " \n"
-					+ "\t}"
-					);
+                    + "\t}"
+				);
 			}
 		}
 

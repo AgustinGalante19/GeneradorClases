@@ -69,7 +69,7 @@
           "nombre": "pReg"
         }
       ],
-     
+
       "contenido": "\n\t[NombrePropiedad] = CVM.DR.Lng(pReg, \"[TagPropiedad]\");"
     },
     {
@@ -82,7 +82,7 @@
           "nombre": "pReg"
         }
       ],
-      "contenido": "\tstring lstr_res = \"OK\";\n\t{\n\t\tref var withBlock = ref this;\n\t\tCVM.DRSet.Lng(pReg, \"ID_CET006\", withBlock.id_cet006);\n\t\tCVM.DRSet.Lng(pReg, \"FDDJJLIVA\", withBlock.fddjjliva);\n\t\tCVM.DRSet.Str(pReg, \"CCORPOR\", withBlock.ccorpor);\n\t\tCVM.DRSet.Lng(pReg, \"CFMES\", withBlock.cfmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDEX\", withBlock.cfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"AJUCFMDEX\", withBlock.ajucfmdex);\n\t\tCVM.DRSet.Lng(pReg, \"DFMES\", withBlock.dfmes);\n\t\tCVM.DRSet.Lng(pReg, \"VGMES\", withBlock.vgmes);\n\t\tCVM.DRSet.Lng(pReg, \"IEEMES\", withBlock.ieemes);\n\t\tCVM.DRSet.Lng(pReg, \"VENMES\", withBlock.venmes);\n\t\tCVM.DRSet.Lng(pReg, \"CIEJER\", withBlock.ciejer);\n\t\tCVM.DRSet.Lng(pReg, \"PIMES\", withBlock.pimes);\n\t\tCVM.DRSet.Lng(pReg, \"ACMES\", withBlock.acmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMDMES\", withBlock.cfmdmes);\n\t\tCVM.DRSet.Lng(pReg, \"CFMRMES\", withBlock.cfmrmes);\n\t\tCVM.DRSet.Str(pReg, \"CUSUARIO\", withBlock.cusuario);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZ\", withBlock.factualz);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZ\", withBlock.hsactualz);\n\t\tCVM.DRSet.Str(pReg, \"CPROCESOAU\", withBlock.cprocesoau);\n\t\tCVM.DRSet.Lng(pReg, \"FACTUALZAU\", withBlock.factualzau);\n\t\tCVM.DRSet.Lng(pReg, \"HSACTUALZA\", withBlock.hsactualza);\n\t}\n\treturn lstr_res;\n"
+      "contenido": "\n\t\tCVM.DRSet.Lng(pReg, \"[TagPropiedad]\", [NombrePropiedad]);"
     },
     {
       "alcance": "public",
@@ -156,7 +156,7 @@
           "nombre": "psql"
         }
       ],
-      "contenido": "\tif (this.Ope.EsAlta)\n\t{\n\t\tpsql.q_SET(\"ID_CET006\", this.ID, default, !mTablaConfig.lg_identity);\n\t}\n\tpsql.q_SET(\"FDDJJLIVA\", this.fddjjliva, \"N\");\n\tpsql.q_SET(\"CCORPOR\", this.ccorpor, \"T\");\n\tpsql.q_SET(\"CFMES\", this.cfmes, \"N\");\n\tpsql.q_SET(\"CFMDEX\", this.cfmdex, \"N\");\n\tpsql.q_SET(\"AJUCFMDEX\", this.ajucfmdex, \"N\");\n\tpsql.q_SET(\"DFMES\", this.dfmes, \"N\");\n\tpsql.q_SET(\"VGMES\", this.vgmes, \"N\");\n\tpsql.q_SET(\"IEEMES\", this.ieemes, \"N\");\n\tpsql.q_SET(\"VENMES\", this.venmes, \"N\");\n\tpsql.q_SET(\"CIEJER\", this.ciejer, \"N\");\n\tpsql.q_SET(\"PIMES\", this.pimes, \"N\");\n\tpsql.q_SET(\"ACMES\", this.acmes, \"N\");\n\tpsql.q_SET(\"CFMDMES\", this.cfmdmes, \"N\");\n\tpsql.q_SET(\"CFMRMES\", this.cfmrmes, \"N\");\n\tpsql.q_SET(\"CUSUARIO\", this.cusuario, \"T\");\n\tpsql.q_SET(\"FACTUALZ\", this.factualz, \"N\");\n\tpsql.q_SET(\"HSACTUALZ\", this.hsactualz, \"N\");\n\tpsql.q_SET(\"CPROCESOAU\", this.cprocesoau, \"T\");\n\tpsql.q_SET(\"FACTUALZAU\", this.factualzau, \"N\");\n\tpsql.q_SET(\"HSACTUALZA\", this.hsactualza, \"N\");\n"
+      "contenido": "[CondicionalID]\n\tpsql.q_SET(\"[TagPropiedad]\", this.[NombrePropiedad], \"[TipoPropiedad]\");"
     },
     {
       "alcance": "public",
