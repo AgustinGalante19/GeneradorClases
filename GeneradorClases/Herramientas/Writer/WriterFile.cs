@@ -16,13 +16,11 @@ namespace GeneradorClases.Herramientas.Writer
 	{
 
 		FileStream Fs;
-		public const string xd = "ASDASD";
 		public WriterFile(string pathFile)
 		{
 			Fs = File.Create(pathFile);
 		}
-
-		private void Escribir(string text)
+        private void Escribir(string text)
 		{
 			Fs.Write(Encoding.ASCII.GetBytes(text), 0, Encoding.ASCII.GetBytes(text).Length);
 		}
@@ -250,11 +248,19 @@ namespace GeneradorClases.Herramientas.Writer
 		}
 		public void CrearPropiedades(List<CampoClase> properties)
 		{
-
-			Escribir("\n");
+            
+            Escribir("\n");
 			properties.ForEach(propertie => Escribir("\n\t" + "public " + propertie.Tipo_Resultado.ToLower() + " " + propertie.campo.ToLower().Trim() + " { get => " + propertie.Variable_Resultado.Trim() + "; set => " + propertie.Variable_Resultado.Trim() + " = value;}"));
 			Escribir("\n");
+			GenerarID(properties.First().campo.Trim().ToLower(), properties.First().Tipo_Resultado.ToLower());
 		}
+
+		public void GenerarID(string id, string type)
+		{
+			Escribir("\n\t");
+            Escribir("\n\t" + "public "+ type +" ID" + " " + " { get => " + id + "; set => " + id + " = value;}");
+        }
+
 		public void Fin()
 		{
 			Escribir("\n}");
