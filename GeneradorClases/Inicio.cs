@@ -100,8 +100,8 @@ namespace GeneradorClases
                 writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First(), _Constant.Constantes, _Objects.objetos);
                 writer.CrearVariables(resultados);
 				writer.CrearPropiedades(resultados);
-                writer.CrearMetodos(_Method.Metodos); 
-                writer.Fin();
+				writer.CrearMetodos(_Method.Metodos, new List<string>(resultados.Select(x => x.campo.Trim()).ToList())); 
+				writer.Fin();
 
                 MessageBox.Show("El archivo se guardo en: " + tb_archivo_path.Text);
             }

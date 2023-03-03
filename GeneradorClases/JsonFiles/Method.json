@@ -69,7 +69,8 @@
           "nombre": "pReg"
         }
       ],
-      "contenido": "\n\t{\n\t\tvar withBlock = this;\n\t\twithBlock.id_cet006 = CVM.DR.Lng(pReg, \"ID_CET006\");\n\t\twithBlock.fddjjliva = CVM.DR.Lng(pReg, \"FDDJJLIVA\");\n\t\twithBlock.ccorpor = CVM.DR.Str(pReg, \"CCORPOR\");\n\t\twithBlock.cfmes = CVM.DR.Lng(pReg, \"CFMES\");\n\t\twithBlock.cfmdex = CVM.DR.Lng(pReg, \"CFMDEX\");\n\t\twithBlock.ajucfmdex = CVM.DR.Lng(pReg, \"AJUCFMDEX\");\n\t\twithBlock.dfmes = CVM.DR.Lng(pReg, \"DFMES\");\n\t\twithBlock.vgmes = CVM.DR.Lng(pReg, \"VGMES\");\n\t\twithBlock.ieemes = CVM.DR.Lng(pReg, \"IEEMES\");\n\t\twithBlock.venmes = CVM.DR.Lng(pReg, \"VENMES\");\n\t\twithBlock.ciejer = CVM.DR.Lng(pReg, \"CIEJER\");\n\t\twithBlock.pimes = CVM.DR.Lng(pReg, \"PIMES\");\n\t\twithBlock.acmes = CVM.DR.Lng(pReg, \"ACMES\");\n\t\twithBlock.cfmdmes = CVM.DR.Lng(pReg, \"CFMDMES\");\n\t\twithBlock.cfmrmes = CVM.DR.Lng(pReg, \"CFMRMES\");\n\t\twithBlock.cusuario = CVM.DR.Str(pReg, \"CUSUARIO\");\n\t\twithBlock.factualz = CVM.DR.Lng(pReg, \"FACTUALZ\");\n\t\twithBlock.hsactualz = CVM.DR.Lng(pReg, \"HSACTUALZ\");\n\t\twithBlock.cprocesoau = CVM.DR.Str(pReg, \"CPROCESOAU\");\n\t\twithBlock.factualzau = CVM.DR.Lng(pReg, \"FACTUALZAU\");\n\t\twithBlock.hsactualza = CVM.DR.Lng(pReg, \"HSACTUALZA\");\t\n\t}\n\treturn lstr_res;\n"
+     
+      "contenido": "\n\t[NombrePropiedad] = CVM.DR.Lng(pReg, \"[TagPropiedad]\");"
     },
     {
       "alcance": "public",

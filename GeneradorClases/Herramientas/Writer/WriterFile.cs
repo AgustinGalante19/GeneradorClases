@@ -123,14 +123,16 @@ namespace GeneradorClases.Herramientas.Writer
                 }
 			});
         }
-        public void CrearMetodos(List<Metodo> lst_metodos)
+        public void CrearMetodos(List<Metodo> lst_metodos, List<string> CampoClase)
 		{
 			lst_metodos.RemoveAt(0);//elimino el constructor
 			foreach (var metodo in lst_metodos)
 			{
 				Escribir("\n");
 				Escribir("\t" + metodo.alcance + " " + metodo.tipo + " " + metodo.nombre);
-				Escribir("(");
+				Escribir("(");		
+
+				//Inserto los parametros
 				for (int i = 0; i <= metodo.parametros.Count - 1; i++)
 				{
 					if (metodo.parametros.Count - 1 == i)
@@ -143,6 +145,30 @@ namespace GeneradorClases.Herramientas.Writer
 					}
 				}
 				Escribir(")");
+
+				//Modifico los metodos especiales para agregarles las referencias
+				switch (metodo.nombre)
+				{
+					case "CargarDesdeDR":
+						if (metodo.parametros.First().nombre == "pReg")
+						{
+							//cantidad de referencias
+							var ContenidoReplace = metodo.contenido;
+							for (int i = 0; i < CampoClase.Count; i++)
+							{
+								metodo.contenido = metodo.contenido.Replace("[NombrePropiedad]", CampoClase[i].ToLower());
+								metodo.contenido = metodo.contenido.Replace("[TagPropiedad]", CampoClase[i]);
+
+								if (i != CampoClase.Count - 1)
+								{
+									metodo.contenido = metodo.contenido + ContenidoReplace;
+								}
+							}
+						}
+						break;
+				}
+
+				//Agrego tabulaciones
 				string[] content = metodo.contenido.Split(Convert.ToChar("\n"));
 				for (int i = 0; i < content.Length; i++)
 				{
