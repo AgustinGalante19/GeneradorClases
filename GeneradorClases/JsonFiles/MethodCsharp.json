@@ -162,17 +162,8 @@
       "alcance": "public",
       "nombre": "CargarDefaultAlta",
       "tipo": "void",
-      "parametros": [
-        {
-          "tipo": "int",
-          "nombre": "pint_id_periodo"
-        },
-        {
-          "tipo": "string",
-          "nombre": "pstr_ccorpor"
-        }
-      ],
-      "contenido": "\t{\n\t\tref var withBlock = ref this;\n\t\twithBlock.id_cet006 = 0;\n\t\twithBlock.fddjjliva = pint_id_periodo;\n\t\twithBlock.ccorpor = pstr_ccorpor;\n\t\twithBlock.cusuario = CVM.RT.Usuario.cd_usuario;\n\t\twithBlock.factualz = CVM.RT.Hoy(\"YYYYMMDD\");\n\t\twithBlock.hsactualz = CVM.RT.Hora(\"HHMMSS\");\n\t\twithBlock.cprocesoau = withBlock.cusuario;\n\t\twithBlock.factualzau = withBlock.factualz;\n\t\twithBlock.hsactualza = withBlock.hsactualz;\n\t}"
+      "parametros": [],
+      "contenido": "\t{\n\t}"
     },
     {
       "alcance": "public",

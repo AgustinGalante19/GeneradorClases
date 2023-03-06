@@ -36,71 +36,69 @@ namespace GeneradorClases
 
         private void btn_generar_Click(object sender, EventArgs e)
         {	
-			if (cb_lenguajes.SelectedItem == "C#")
-            {
-                Tabla obj_tabla = new Tabla();
-                Campo obj_campo = new Campo();
+			
+              Tabla obj_tabla = new Tabla();
+              Campo obj_campo = new Campo();
 
-                //Lleno la lista con los datos del grid
-                List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
+              //Lleno la lista con los datos del grid
+              List<CampoClase> lst_campos = obj_tabla.LlenarDataGridView(dg_datos);
 
-                //Valido que los datos no sean nulos
-                string lstr_result = ValidarGrid(lst_campos);
+              //Valido que los datos no sean nulos
+              string lstr_result = ValidarGrid(lst_campos);
 
-                if (lstr_result == "OK")
-                {
-                    //Calculo los tipos y seteo las propiedades
-                    lst_campos = CalcularTipos(lst_campos);
+              if (lstr_result == "OK")
+              {
+                  //Calculo los tipos y seteo las propiedades
+                  lst_campos = CalcularTipos(lst_campos);
 
-                    //Bindeo los datos utilizando BindingList para que herede la interfaz que comprende las celdas
-                    dg_datos.DataSource = new BindingList<CampoClase>(lst_campos);
+                  //Bindeo los datos utilizando BindingList para que herede la interfaz que comprende las celdas
+                  dg_datos.DataSource = new BindingList<CampoClase>(lst_campos);
 
-                    //pinto las celdas
-                    for (int i = 0; i < lst_campos.Count - 1; i++)
-                    {
-                        for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
-                        {
-                            dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
-                        }
-                    }			                    
+                  //pinto las celdas
+                  for (int i = 0; i < lst_campos.Count - 1; i++)
+                  {
+                      for (int j = 0; j < dg_datos.Rows[i].Cells.Count; j++)
+                      {
+                          dg_datos.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                      }
+                  }			                    
 
 
-					CrearClase(lst_campos.Select(x =>
-					 new CampoClase()
-					 {
-						 Parametro_Resultado = x.Parametro_Resultado,
-						 Tipo_Resultado = x.Tipo_Resultado,
-						 Variable_Resultado = x.Variable_Resultado,
-                         campo = x.campo,
-                         default_value= x.default_value,
-                         Abr_sigla_Resultado = x.Abr_sigla_Resultado
-					 }
-					).ToList<CampoClase>());
-                }
-                else if (lstr_result != "")
-                {
-                    MessageBox.Show(lstr_result, "Estado de validación");
-                }
-            }
+				CrearClase(lst_campos.Select(x =>
+				 new CampoClase()
+				 {
+					 Parametro_Resultado = x.Parametro_Resultado,
+					 Tipo_Resultado = x.Tipo_Resultado,
+					 Variable_Resultado = x.Variable_Resultado,
+                       campo = x.campo,
+                       default_value= x.default_value,
+                       Abr_sigla_Resultado = x.Abr_sigla_Resultado
+				 }
+				).ToList<CampoClase>());
+              }
         }
         private void CrearClase(List<CampoClase> resultados)
-        {			
+        {
+            WriterFile writer;
+			string methodsJsonPath;
+			string currentPath = Directory.GetCurrentDirectory();
+			currentPath = currentPath.Replace("bin", "");
+			currentPath = currentPath.Replace("Debug", "");
+			methodsJsonPath = currentPath + "JsonFiles//MethodCsharp.json";
 			try
-            {
-                WriterFile writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs");
+            {                				
+                if(cb_lenguajes.Text == "VB") methodsJsonPath = currentPath + "JsonFiles//MethodVB.json";
 
-                string currentPath = Directory.GetCurrentDirectory();
-                currentPath = currentPath.Replace("bin", "");
-                currentPath = currentPath.Replace("Debug", "");
-                string methodsJsonPath = currentPath + "JsonFiles//Method.json";
-                
-                CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(methodsJsonPath));
+				CVM_Method _Method = JsonConvert.DeserializeObject<CVM_Method>(File.ReadAllText(methodsJsonPath));
                 CVM_Constant _Constant = JsonConvert.DeserializeObject<CVM_Constant>(File.ReadAllText(currentPath + "JsonFiles//Constant.json"));
                 CVM_Object _Objects = JsonConvert.DeserializeObject<CVM_Object>(File.ReadAllText(currentPath + "JsonFiles//Objects.json"));
 
-                writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First(), _Constant.Constantes, _Objects.objetos);
+
+				writer = new WriterFile(tb_archivo_path.Text + @"\" + tb_archivo_nombre.Text + ".cs", cb_lenguajes.Text);
+				writer.CrearClase(tb_nombre_clase.Text, _Method.Metodos.First(), _Constant.Constantes, _Objects.objetos);
                 writer.CrearVariables(resultados);
 				writer.CrearPropiedades(resultados);
+
                 List<Propertie> lst_props = new List<Propertie>();
                 resultados.ForEach(res =>
                 {

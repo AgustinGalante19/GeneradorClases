@@ -50,11 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Herramientas\Campo.cs" />
-    <Compile Include="Herramientas\Writer\Interface\IClientBuilder.cs" />
-    <Compile Include="Herramientas\Writer\Interface\IJsonWriterBuilder.cs" />
-    <Compile Include="Herramientas\Writer\Interface\IManualWriterBuilder.cs" />
-    <Compile Include="Herramientas\Writer\Interface\WriterBuilder.cs" />
+    <Compile Include="Herramientas\Writer\IWriterClass.cs" />
+    <Compile Include="Herramientas\Writer\WriterCsharp.cs" />
     <Compile Include="Herramientas\Writer\WriterFile.cs" />
+    <Compile Include="Herramientas\Writer\WriterVB.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,7 +92,8 @@
     </EmbeddedResource>
     <None Include="JsonFiles\Constructor.json" />
     <None Include="JsonFiles\Constant.json" />
-    <None Include="JsonFiles\Method.json" />
+    <None Include="JsonFiles\MethodCsharp.json" />
+    <None Include="JsonFiles\MethodVB.json" />
     <None Include="JsonFiles\Objects.json" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GeneradorClases.Modelos.CampoClase.datasource" />
